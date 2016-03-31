@@ -2,15 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="#582f2f"
+    android:background="#fff"
     android:orientation="horizontal"
     android:padding="10dp">
 
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#ddd">
+        android:layout_weight="1">
 
         <ImageView
             android:layout_width="70dp"
@@ -22,8 +21,7 @@
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:background="#ddd">
+        android:layout_weight="3">
 
         <ImageView
             android:id="@+id/path_icon"
@@ -144,33 +142,40 @@
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="#ddd">
+        android:layout_weight="1">
 
-            <!--android:id="@+id/"-->
         <RelativeLayout
+            android:id="@+id/publish_time_plane"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/publish_time_icon"
-                android:src="@drawable/publish_time"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"/>
+                android:src="@drawable/publish_time" />
+
             <TextView
                 android:id="@+id/publish_time_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/publish_time_icon"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/publish_time_icon"
-                android:layout_alignBaseline="@id/publish_time_icon"
-                android:text="1mins"
-                />
+                android:text="1mins" />
 
         </RelativeLayout>
 
-
+        <ImageView
+            android:id="@+id/enter_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/publish_time_plane"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/enter" />
 
     </RelativeLayout>
 
