@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="#fff"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/car" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3">
+
+        <ImageView
+            android:id="@+id/path_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/path" />
+
+        <TextView
+            android:id="@+id/begin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/path_icon"
+            android:layout_toRightOf="@id/path_icon"
+            android:paddingLeft="8dp"
+            android:text="深圳" />
+
+        <TextView
+            android:id="@+id/path_separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/begin"
+            android:layout_toRightOf="@id/begin"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="--" />
+
+        <TextView
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/path_icon"
+            android:layout_toRightOf="@id/path_separator"
+            android:text="北京" />
+
+        <TextView
+            android:id="@+id/weight_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/path_icon"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:text="重量:"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/weight_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/weight_name"
+            android:layout_toRightOf="@id/weight_name"
+            android:paddingLeft="5px"
+            android:text="10T"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/vehicle_type_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/weight_name"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:text="车型："
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/vehicle_type_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/vehicle_type_name"
+            android:layout_toRightOf="@id/vehicle_type_name"
+            android:maxWidth="80dp"
+            android:paddingLeft="5px"
+            android:text="货柜车"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/vehicle_age_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/vehicle_type_name"
+            android:paddingLeft="100dp"
+            android:text="车龄："
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/vehicle_age_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/vehicle_type_name"
+            android:layout_toRightOf="@id/vehicle_age_name"
+            android:paddingLeft="5px"
+            android:text="5年以下"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/action_time_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/vehicle_type_name"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:text="时间："
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/action_time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/action_time_name"
+            android:layout_toRightOf="@id/action_time_name"
+            android:paddingLeft="5dp"
+            android:text="2016年04月01日 -- 2016年05月01日"
+            android:textSize="10sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:id="@+id/publish_time_plane"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/publish_time_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/publish_time" />
+
+            <TextView
+                android:id="@+id/publish_time_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/publish_time_icon"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/publish_time_icon"
+                android:text="1mins" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/enter_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/publish_time_plane"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/enter" />
+
+    </RelativeLayout>
+
+</LinearLayout>
