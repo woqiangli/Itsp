@@ -23,7 +23,7 @@ dependencies {
     compile 'joda-time:joda-time:2.9.2'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'junit:junit:4.12'
+    
     testCompile files('libs_test/powermock-api-mockito-1.5.4.jar')
     testCompile 'org.assertj:assertj-core:1.7.0'
     testCompile files('libs_test/fest-reflect-1.4.1.jar')
