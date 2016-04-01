@@ -1,79 +1,35 @@
 package sf.com.itsp.model;
 
-import java.util.Date;
-
 public class Order {
-    private String no;
-    private String begin;
-    private String end;
-    private String weight;
-    private String vehicleType;
-    private String vehicleAge;
-    private String actionTime;
-    private Date publishTime;
 
+    private String original;
+    private String target;
+//    private String startTime;
+//    private String endTime;
 
-    public String getNo() {
-        return no;
+    public String getOriginal() {
+        return original;
     }
 
-    public void setNo(String no) {
-        this.no = no;
+    public void setOriginal(String original) {
+        this.original = original;
     }
 
-    public String getBegin() {
-        return begin;
+    public String getTarget() {
+        return target;
     }
 
-    public void setBegin(String begin) {
-        this.begin = begin;
+    public void setTarget(String target) {
+        this.target = target;
     }
 
-    public String getEnd() {
-        return end;
-    }
-
-    public void setEnd(String end) {
-        this.end = end;
-    }
-
-    public String getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(String weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
-    public String getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
-    }
-
-    public String getVehicleAge() {
-        return vehicleAge;
-    }
-
-    public void setVehicleAge(String vehicleAge) {
-        this.vehicleAge = vehicleAge;
-    }
-
-    public String getActionTime() {
-        return actionTime;
-    }
-
-    public void setActionTime(String actionTime) {
-        this.actionTime = actionTime;
-    }
-
-    public Date getPublishTime() {
-        return publishTime;
-    }
-
-    public void setPublishTime(Date publishTime) {
-        this.publishTime = publishTime;
-    }
+    private double weight;
 }
