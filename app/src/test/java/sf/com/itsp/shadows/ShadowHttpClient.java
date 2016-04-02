@@ -10,7 +10,7 @@ import org.robolectric.annotation.RealObject;
 import java.util.List;
 
 import sf.com.itsp.connectivity.HttpClient;
-import sf.com.itsp.model.Order;
+import sf.com.itsp.domain.Order;
 
 import static org.assertj.core.util.Lists.newArrayList;
 

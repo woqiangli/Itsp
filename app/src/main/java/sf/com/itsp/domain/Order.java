@@ -1,4 +1,4 @@
-package sf.com.itsp.model;
+package sf.com.itsp.domain;
 
 public class Order {
 

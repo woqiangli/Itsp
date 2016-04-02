@@ -3,7 +3,7 @@ package sf.com.itsp.connectivity;
 import java.util.Arrays;
 import java.util.List;
 
-import sf.com.itsp.model.Order;
+import sf.com.itsp.domain.Order;
 
 public class HttpClient {
 

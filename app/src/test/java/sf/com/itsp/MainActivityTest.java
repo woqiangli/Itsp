@@ -19,21 +19,16 @@ import static sf.com.test.condition.ContainsTextCondition.text;
 import static sf.com.test.condition.ListViewChildCondition.childWith;
 import static sf.com.test.condition.ListViewContainsItemsCondition.numberOfItems;
 
-//import static org.assertj.core.api.Assertions.assertThat;
-//org.fest.assertions.api.Assertions.assertThat
-
 @RunWith(BasicTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.JELLY_BEAN)
 public class MainActivityTest {
 
     @Before
     public void setup() {
-//        pretendOrderWhenHttpRequest();
     }
 
     @After
     public void teardown() {
-//        ShadowHttpClient.reset();
     }
 
     @Test
@@ -53,10 +48,6 @@ public class MainActivityTest {
 
 
         assertThat(listView).has(numberOfItems(2));
-
-//        ShadowListView shadowListView = shadowOf(listView);
-
-//        View childAt = listView.getChildAt(1);
         assertThat(listView).has(childWith(text("shenzhen2 -- guangzhuo2")));
         assertThat(listView).has(childWith(text("2.0")));
     }
