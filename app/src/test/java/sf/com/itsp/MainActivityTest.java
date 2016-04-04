@@ -1,6 +1,5 @@
 package sf.com.itsp;
 
-import android.os.Build;
 import android.widget.ListView;
 
 import org.junit.After;
@@ -8,19 +7,23 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowPaint;
 import org.robolectric.util.ActivityController;
 
-import sf.com.itsp.shadows.ShadowHttpClient;
-import sf.com.test.BasicTestRunner;
+import sf.com.itsp.shadows.ShadowApiProxy;
+import sf.com.itsp.shadows.ShadowConnectionProxy;
+import sf.com.itsp.utils.ConnectionProxy;
+import sf.com.testUtil.BasicTestRunner;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.robolectric.Robolectric.buildActivity;
-import static sf.com.test.condition.ContainsTextCondition.text;
-import static sf.com.test.condition.ListViewChildCondition.childWith;
-import static sf.com.test.condition.ListViewContainsItemsCondition.numberOfItems;
+import static sf.com.testUtil.condition.ContainsTextCondition.text;
+import static sf.com.testUtil.condition.ListViewChildCondition.childWith;
+import static sf.com.testUtil.condition.ListViewContainsItemsCondition.numberOfItems;
 
 @RunWith(BasicTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.JELLY_BEAN)
+@Config(constants = BuildConfig.class,
+        shadows = {ShadowApiProxy.class})
 public class MainActivityTest {
 
     @Before
@@ -32,9 +35,10 @@ public class MainActivityTest {
     }
 
     @Test
-    @Config(shadows = {ShadowHttpClient.class})
+    @Config(shadows = {ShadowConnectionProxy.class})
     public void should_show_orders_when_on_created() {
         // given
+        ShadowConnectionProxy.orders = "123";
         ActivityController<MainActivity> mainActivityActivityController = buildActivity(MainActivity.class);
         MainActivity mainActivity = mainActivityActivityController.get();
 

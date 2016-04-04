@@ -1,4 +1,4 @@
-package sf.com.test.condition;
+package sf.com.testUtil.condition;
 
 import android.view.View;
 import android.widget.ListAdapter;

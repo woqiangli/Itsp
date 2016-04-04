@@ -4,11 +4,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.google.gson.reflect.TypeToken;
+
 import java.util.List;
 
+import sf.com.itsp.connectivity.ApiProxy;
 import sf.com.itsp.order.CarrierOrderAdapter;
 import sf.com.itsp.connectivity.HttpClient;
 import sf.com.itsp.domain.Order;
+import sf.com.itsp.utils.ConnectionProxy;
+import sf.com.itsp.utils.JsonConverter;
 
 public class MainActivity extends Activity {
     private List<Order> orderList;
@@ -23,7 +28,8 @@ public class MainActivity extends Activity {
     }
 
     private void requestOrder() {
-        orderList = new HttpClient().requestOrder();
+        String json = ConnectionProxy.getInstance().requestOrder();
+        orderList = JsonConverter.jsonFromObjectList(json, TypeToken.get(Order.class));
     }
 
     private void initListView() {
