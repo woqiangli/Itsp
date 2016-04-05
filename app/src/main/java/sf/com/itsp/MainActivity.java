@@ -31,6 +31,9 @@ public class MainActivity extends Activity {
     private void initListView() {
         ListView listView = (ListView) findViewById(R.id.order_list);
         CarrierOrderAdapter adapter = new CarrierOrderAdapter(getApplicationContext());
+        Order order = new Order();
+        order.setVehicleType("货柜车");
+        orderList.add(order);
         adapter.setOrderList(orderList);
         listView.setAdapter(adapter);
     }
