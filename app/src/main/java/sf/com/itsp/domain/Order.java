@@ -4,8 +4,7 @@ public class Order {
 
     private String original;
     private String target;
-//    private String startTime;
-//    private String endTime;
+    private String vehicleType;
 
     public String getOriginal() {
         return original;
@@ -32,4 +31,8 @@ public class Order {
     }
 
     private double weight;
+
+    public void setVehicleType(String vehicleType) { this.vehicleType = vehicleType; }
+
+    public String getVehicleType() { return vehicleType; }
 }

@@ -3,7 +3,6 @@ package sf.com.itsp.order;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +12,7 @@ import sf.com.itsp.domain.Order;
 public class OrderItemView extends LinearLayout {
     private TextView weightValueTextView;
     private TextView lineTextView;
+    private TextView vehicleTypeTextView;
 
     public OrderItemView(Context context) {
         super(context);
@@ -35,10 +35,12 @@ public class OrderItemView extends LinearLayout {
 
         weightValueTextView = (TextView) findViewById(R.id.weight_value);
         lineTextView = (TextView) findViewById(R.id.line_view);
+        vehicleTypeTextView = (TextView) findViewById(R.id.vehicle_type_value);
     }
 
     public void setModel(Order order) {
         weightValueTextView.setText(String.valueOf(order.getWeight()));
         lineTextView.setText(String.format("%s -- %s", order.getOriginal(), order.getTarget()));
+        vehicleTypeTextView.setText(String.valueOf(order.getVehicleType()));
     }
 }
