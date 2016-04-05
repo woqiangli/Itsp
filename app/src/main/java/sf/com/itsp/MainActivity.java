@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
-
 import java.util.List;
-
 import sf.com.itsp.domain.Order;
 import sf.com.itsp.order.CarrierOrderAdapter;
 import sf.com.itsp.utils.ConnectionProxy;
@@ -27,7 +25,7 @@ public class MainActivity extends Activity {
 
     private void requestOrder() {
         String json = ConnectionProxy.getInstance().requestOrder();
-        orderList = JsonConverter.jsonFromObjectList(json, new TypeToken<List<Order>>(){});
+        orderList = JsonConverter.jsonToObject(json, new TypeToken<List<Order>>() {});
     }
 
     private void initListView() {

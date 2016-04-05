@@ -7,12 +7,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowPaint;
 import org.robolectric.util.ActivityController;
 
 import sf.com.itsp.shadows.ShadowApiProxy;
 import sf.com.itsp.shadows.ShadowConnectionProxy;
-import sf.com.itsp.utils.ConnectionProxy;
 import sf.com.testUtil.BasicTestRunner;
 
 import static org.fest.assertions.api.Assertions.assertThat;
@@ -38,7 +36,7 @@ public class MainActivityTest {
     @Config(shadows = {ShadowConnectionProxy.class})
     public void should_show_orders_when_on_created() {
         // given
-        ShadowConnectionProxy.orders = "123";
+        ShadowConnectionProxy.orders = "[{'original':'original1','target':'target1','weight':2.0},{'original':'original2','target':'target2','weight':2.0}]";
         ActivityController<MainActivity> mainActivityActivityController = buildActivity(MainActivity.class);
         MainActivity mainActivity = mainActivityActivityController.get();
 
@@ -52,7 +50,7 @@ public class MainActivityTest {
 
 
         assertThat(listView).has(numberOfItems(2));
-        assertThat(listView).has(childWith(text("shenzhen2 -- guangzhuo2")));
+        assertThat(listView).has(childWith(text("original2 -- target2")));
         assertThat(listView).has(childWith(text("2.0")));
     }
 }

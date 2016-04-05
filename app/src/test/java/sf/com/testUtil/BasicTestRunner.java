@@ -6,7 +6,6 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.internal.bytecode.InstrumentationConfiguration;
 
 import sf.com.itsp.shadows.ShadowApiProxy;
-import sf.com.itsp.shadows.ShadowConnectionProxy;
 import sf.com.itsp.utils.ConnectionProxy;
 
 public class BasicTestRunner extends RobolectricGradleTestRunner {

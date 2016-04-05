@@ -1,5 +1,6 @@
 package sf.com.itsp.shadows;
 
+import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
 
@@ -13,6 +14,7 @@ public class ShadowConnectionProxy {
     @RealObject
     private ConnectionProxy connectionProxy;
 
+    @Implementation
     public String requestOrder() {
         return orders;
     }
