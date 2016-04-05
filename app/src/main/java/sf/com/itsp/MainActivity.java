@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
 
     private void requestOrder() {
         String json = ConnectionProxy.getInstance().requestOrder();
-        orderList = JsonConverter.jsonFromObjectList(json, TypeToken.get(Order.class));
+        orderList = JsonConverter.jsonFromObjectList(json, new TypeToken<List<Order>>(){});
     }
 
     private void initListView() {
