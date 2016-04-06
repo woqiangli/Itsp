@@ -3,6 +3,7 @@ package sf.com.itsp.order;
 import android.content.Context;
 import android.view.ViewGroup;
 
+import java.util.Collections;
 import java.util.List;
 
 import sf.com.itsp.domain.Order;
@@ -11,7 +12,7 @@ import static java.util.Arrays.asList;
 
 public class CarrierOrderAdapter extends ItspBaseAdpater<OrderItemView> {
     private Context context;
-    private List<Order> orderList = asList();
+    private List<Order> orderList = Collections.emptyList();
 
     public CarrierOrderAdapter(Context context) {
         this.context = context;
