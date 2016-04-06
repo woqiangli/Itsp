@@ -117,7 +117,7 @@
                 android:textSize="10sp" />
 
             <TextView
-                android:id="@+id/action_time_value"
+                android:id="@+id/task_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

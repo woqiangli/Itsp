@@ -40,6 +40,7 @@ public class MainActivityTest {
         assertThat(listView).has(childWith(text("2.0")));
         assertThat(listView).has(childWith(text("车型2")));
         assertThat(listView).has(childWith(text("2")));
+        assertThat(listView).has(childWith(text("2016-04-03 -- 2016-04-06")));
     }
 
     private void mockOrderResponse() {
@@ -49,14 +50,18 @@ public class MainActivityTest {
                 "        'target': 'target1',\n" +
                 "        'weight': 2.0,\n" +
                 "        'vehicleType': '车型'," +
-                "        'vehicleAge': 1" +
+                "        'vehicleAge': 1," +
+                "        'startDate': '2016-04-03'," +
+                "        'endDate': '2016-04-05'" +
                 "    },\n" +
                 "    {\n" +
                 "        'original': 'original2',\n" +
                 "        'target': 'target2',\n" +
                 "        'weight': 2.0,\n" +
                 "        'vehicleType': '车型2'," +
-                "        'vehicleAge': 2" +
+                "        'vehicleAge': 2," +
+                "        'startDate': '2016-04-03'," +
+                "        'endDate': '2016-04-06'" +
                 "    }\n" +
                 "]";
     }

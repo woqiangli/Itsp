@@ -1,5 +1,7 @@
 package sf.com.itsp.domain;
 
+import java.util.Date;
+
 public class Order {
     private String original;
     private String target;
@@ -7,6 +9,17 @@ public class Order {
 
     private double weight;
     private int vehicleAge;
+
+    private Date startDate;
+    private Date endDate;
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
 
     public int getVehicleAge() {
         return vehicleAge;
@@ -16,27 +29,15 @@ public class Order {
         return original;
     }
 
-    public void setOriginal(String original) {
-        this.original = original;
-    }
-
     public String getTarget() {
         return target;
-    }
-
-    public void setTarget(String target) {
-        this.target = target;
     }
 
     public double getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public String getVehicleType() {
+        return vehicleType;
     }
-
-    public void setVehicleType(String vehicleType) { this.vehicleType = vehicleType; }
-
-    public String getVehicleType() { return vehicleType; }
 }
