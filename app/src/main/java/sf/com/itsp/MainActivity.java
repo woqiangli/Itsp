@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
         AsyncTask<Void, Void, String> asyncTask = new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params) {
-                return ConnectionProxy.getInstance().requestOrder();
+                return ConnectionProxy.getInstance().requestOrder(getApplicationContext());
             }
 
             @Override

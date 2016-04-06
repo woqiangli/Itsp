@@ -1,7 +1,5 @@
 package sf.com.itsp.connectivity;
 
-import android.os.Build;
-
 import com.google.common.io.CharStreams;
 
 import java.io.BufferedOutputStream;
@@ -12,16 +10,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import sf.com.itsp.connectivity.ResponseResult.ResponseResultType;
-import sf.com.itsp.domain.Order;
-import sf.com.itsp.utils.IoUtil;
 
-import static java.lang.String.format;
 import static java.net.HttpURLConnection.HTTP_INTERNAL_ERROR;
 import static java.net.HttpURLConnection.HTTP_OK;
 import static sf.com.itsp.connectivity.ResponseResult.ResponseResultType.FAILED;
@@ -34,7 +27,6 @@ public class HttpClient {
     private static final Charset DEFAULT_CHARSET = Charset.forName("UTF8");
     private static final int CONNECT_TIMEOUT_MILLIS = 30 * 1000;
     private static final int READ_TIMEOUT_MILLIS = 35 * 1000;
-
     private static final String DEFAULT_PROTOCOL = "http";
 
     private String host;
@@ -45,6 +37,32 @@ public class HttpClient {
     public HttpClient(String host, int port) {
         this.host = host;
         this.port = port;
+    }
+
+    public String request(String path) {
+        try {
+            HttpURLConnection connection = initConnection(path);
+            return getResponse(connection);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    private String getResponse(HttpURLConnection connection) throws IOException {
+        InputStream inputStream = connection.getInputStream();
+        String response = CharStreams.toString(new InputStreamReader(inputStream, DEFAULT_CHARSET));
+        inputStream.close();
+        return response;
+    }
+
+    private HttpURLConnection initConnection(String path) throws IOException {
+        URL url = new URL(DEFAULT_PROTOCOL, host, port, path);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setConnectTimeout(8000);
+        connection.setReadTimeout(8000);
+        return connection;
     }
 
     public HttpResponseResult sendRequestGetResponse(String path, String request) {
@@ -58,10 +76,6 @@ public class HttpClient {
         } finally {
             disconnectQuietly(connection);
         }
-    }
-
-    public HttpResponseResult getResponse(String path) {
-        return sendRequestGetResponse(path, "");
     }
 
     private HttpResponseResult receive(HttpURLConnection connection, String path) throws IOException {
@@ -91,32 +105,4 @@ public class HttpClient {
         outputStream.flush();
         outputStream.close();
     }
-
-    private HttpURLConnection initConnection(String path) throws IOException {
-        URL url = new URL(DEFAULT_PROTOCOL, host, port, path);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-        setRequestProperties(connection);
-
-        connection.setDoOutput(true);
-        return connection;
-    }
-
-    private void setRequestProperties(HttpURLConnection connection) {
-        connection.setRequestProperty(HEADER_CONTENT_TYPE, VALUE_APPLICATION_JSON);
-//        connection.setRequestProperty(HEADER_X_SFUSER, accountID);
-//        connection.setRequestProperty(HEADER_X_CREDENTIAL, accountPassword);
-        connection.setConnectTimeout(CONNECT_TIMEOUT_MILLIS);
-        connection.setReadTimeout(READ_TIMEOUT_MILLIS);
-
-        if (Build.VERSION.SDK_INT > 13) {
-            //HACK: fixed http://stackoverflow.com/questions/15411213/android-httpsurlconnection-eofexception
-            connection.setRequestProperty("Connection", "close");
-        }
-
-        for (String key : propertiesMap.keySet()) {
-            connection.setRequestProperty(key, propertiesMap.get(key));
-        }
-    }
-
 }
