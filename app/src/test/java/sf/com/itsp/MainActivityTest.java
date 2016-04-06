@@ -4,7 +4,9 @@ import android.widget.ListView;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ActivityController;
 
 import sf.com.itsp.shadows.ShadowConnectionProxy;
@@ -30,8 +32,8 @@ public class MainActivityTest {
 
         // when
         mainActivityActivityController.create();
-
         ListView listView = (ListView) mainActivity.findViewById(R.id.order_list);
+        ShadowApplication.runBackgroundTasks();
 
         // then
         assertThat(listView).has(numberOfItems(2));

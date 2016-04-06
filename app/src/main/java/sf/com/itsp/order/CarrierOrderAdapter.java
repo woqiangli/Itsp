@@ -7,9 +7,11 @@ import java.util.List;
 
 import sf.com.itsp.domain.Order;
 
+import static java.util.Arrays.asList;
+
 public class CarrierOrderAdapter extends ItspBaseAdpater<OrderItemView> {
     private Context context;
-    private List<Order> orderList;
+    private List<Order> orderList = asList();
 
     public CarrierOrderAdapter(Context context) {
         this.context = context;
@@ -37,5 +39,6 @@ public class CarrierOrderAdapter extends ItspBaseAdpater<OrderItemView> {
 
     public void setOrderList(List<Order> orderList) {
         this.orderList = orderList;
+        notifyDataSetChanged();
     }
 }
