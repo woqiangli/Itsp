@@ -4,9 +4,7 @@ import android.widget.ListView;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ActivityController;
 
 import sf.com.itsp.shadows.ShadowConnectionProxy;
@@ -14,6 +12,7 @@ import sf.com.testUtil.BasicTestRunner;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.robolectric.Robolectric.buildActivity;
+import static org.robolectric.shadows.ShadowApplication.runBackgroundTasks;
 import static sf.com.testUtil.condition.ContainsTextCondition.text;
 import static sf.com.testUtil.condition.ListViewChildCondition.childWith;
 import static sf.com.testUtil.condition.ListViewContainsItemsCondition.numberOfItems;
@@ -33,15 +32,32 @@ public class MainActivityTest {
         // when
         mainActivityActivityController.create();
         ListView listView = (ListView) mainActivity.findViewById(R.id.order_list);
-        ShadowApplication.runBackgroundTasks();
+        runBackgroundTasks();
 
         // then
         assertThat(listView).has(numberOfItems(2));
         assertThat(listView).has(childWith(text("original2 -- target2")));
         assertThat(listView).has(childWith(text("2.0")));
+        assertThat(listView).has(childWith(text("车型2")));
+        assertThat(listView).has(childWith(text("2")));
     }
 
     private void mockOrderResponse() {
-        ShadowConnectionProxy.orders = "[{'original':'original1','target':'target1','weight':2.0},{'original':'original2','target':'target2','weight':2.0}]";
+        ShadowConnectionProxy.orders = "[\n" +
+                "    {\n" +
+                "        'original': 'original1',\n" +
+                "        'target': 'target1',\n" +
+                "        'weight': 2.0,\n" +
+                "        'vehicleType': '车型'," +
+                "        'vehicleAge': 1" +
+                "    },\n" +
+                "    {\n" +
+                "        'original': 'original2',\n" +
+                "        'target': 'target2',\n" +
+                "        'weight': 2.0,\n" +
+                "        'vehicleType': '车型2'," +
+                "        'vehicleAge': 2" +
+                "    }\n" +
+                "]";
     }
 }

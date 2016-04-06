@@ -13,6 +13,7 @@ public class OrderItemView extends LinearLayout {
     private TextView weightValueTextView;
     private TextView lineTextView;
     private TextView vehicleTypeTextView;
+    private TextView vehicleAgeTextView;
 
     public OrderItemView(Context context) {
         super(context);
@@ -36,11 +37,13 @@ public class OrderItemView extends LinearLayout {
         weightValueTextView = (TextView) findViewById(R.id.weight_value);
         lineTextView = (TextView) findViewById(R.id.line_view);
         vehicleTypeTextView = (TextView) findViewById(R.id.vehicle_type_value);
+        vehicleAgeTextView = (TextView) findViewById(R.id.vehicle_age_value);
     }
 
     public void setModel(Order order) {
         weightValueTextView.setText(String.valueOf(order.getWeight()));
         lineTextView.setText(String.format("%s -- %s", order.getOriginal(), order.getTarget()));
-        vehicleTypeTextView.setText(String.valueOf(order.getVehicleType()));
+        vehicleTypeTextView.setText(order.getVehicleType());
+        vehicleAgeTextView.setText(String.valueOf(order.getVehicleAge()));
     }
 }

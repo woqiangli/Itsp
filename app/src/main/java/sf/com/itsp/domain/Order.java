@@ -1,10 +1,16 @@
 package sf.com.itsp.domain;
 
 public class Order {
-
     private String original;
     private String target;
     private String vehicleType;
+
+    private double weight;
+    private int vehicleAge;
+
+    public int getVehicleAge() {
+        return vehicleAge;
+    }
 
     public String getOriginal() {
         return original;
@@ -29,8 +35,6 @@ public class Order {
     public void setWeight(double weight) {
         this.weight = weight;
     }
-
-    private double weight;
 
     public void setVehicleType(String vehicleType) { this.vehicleType = vehicleType; }
 
