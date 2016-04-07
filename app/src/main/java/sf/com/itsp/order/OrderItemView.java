@@ -20,6 +20,7 @@ public class OrderItemView extends LinearLayout {
     private TextView vehicleTypeTextView;
     private TextView vehicleAgeTextView;
     private TextView taskDurationTextView;
+    private TextView publishTimeTextView;
 
     public OrderItemView(Context context) {
         super(context);
@@ -45,6 +46,7 @@ public class OrderItemView extends LinearLayout {
         vehicleTypeTextView = (TextView) findViewById(R.id.vehicle_type_value);
         vehicleAgeTextView = (TextView) findViewById(R.id.vehicle_age_value);
         taskDurationTextView = (TextView) findViewById(R.id.task_duration);
+        publishTimeTextView = (TextView) findViewById(R.id.publish_time);
     }
 
     public void setModel(Order order) {
@@ -56,5 +58,7 @@ public class OrderItemView extends LinearLayout {
         taskDurationTextView.setText(format(CHAR_SPILTER_FORMATTER,
                 formatDateAsYyyyMmDd(order.getStartDate()),
                 formatDateAsYyyyMmDd(order.getEndDate())));
+
+        publishTimeTextView.setText(valueOf(order.getPublishTime()));
     }
 }

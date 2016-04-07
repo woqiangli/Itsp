@@ -13,6 +13,8 @@ public class Order {
     private Date startDate;
     private Date endDate;
 
+    private double publishTime;
+
     public Date getStartDate() {
         return startDate;
     }
@@ -39,5 +41,9 @@ public class Order {
 
     public String getVehicleType() {
         return vehicleType;
+    }
+
+    public double getPublishTime() {
+        return publishTime;
     }
 }
