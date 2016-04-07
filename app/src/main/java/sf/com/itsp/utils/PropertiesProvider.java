@@ -9,6 +9,8 @@ import java.util.Properties;
 import sf.com.itsp.R;
 import sf.com.itsp.domain.ServerAddress;
 
+import static sf.com.itsp.utils.IoUtil.closeInputStream;
+
 public class PropertiesProvider {
     public static final String KEY_SERVER_HOST = "server_host";
     public static final String DEFAULT_SERVER_HOST = "";
@@ -30,6 +32,8 @@ public class PropertiesProvider {
             properties.load(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            closeInputStream(inputStream);
         }
     }
 

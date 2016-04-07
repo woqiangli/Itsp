@@ -15,13 +15,12 @@ import sf.com.itsp.utils.ConnectionProxy;
 import sf.com.itsp.utils.JsonConverter;
 
 public class MainActivity extends Activity {
-    private List<Order> orderList;
     private CarrierOrderAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
 
         initListView();
         requestOrder();
@@ -36,12 +35,16 @@ public class MainActivity extends Activity {
 
             @Override
             protected void onPostExecute(String orderAsJson) {
-                orderList = JsonConverter.jsonFromObjectList(orderAsJson, TypeToken.get(Order[].class));
-                adapter.setOrderList(orderList);
+                refreshListView(orderAsJson);
             }
         };
 
         asyncTask.execute();
+    }
+
+    private void refreshListView(String orderAsJson) {
+        List<Order> orderList = JsonConverter.jsonFromObjectList(orderAsJson, TypeToken.get(Order[].class));
+        adapter.setOrderList(orderList);
     }
 
     private void initListView() {

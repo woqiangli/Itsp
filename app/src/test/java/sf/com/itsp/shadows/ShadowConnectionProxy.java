@@ -1,21 +1,15 @@
 package sf.com.itsp.shadows;
 
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
-import org.robolectric.annotation.RealObject;
+import android.content.Context;
 
-import sf.com.itsp.utils.ConnectionProxy;
+import org.robolectric.annotation.Implements;
 
 @Implements(sf.com.itsp.utils.ConnectionProxy.class)
 public class ShadowConnectionProxy {
 
     public static String orders;
 
-    @RealObject
-    private ConnectionProxy connectionProxy;
-
-    @Implementation
-    public String requestOrder() {
+    public String requestOrder(Context context) {
         return orders;
     }
 }
