@@ -1,164 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/round_corner_in" >
+    android:background="@drawable/round_corner_in"
+    android:padding="8dp">
 
-    <LinearLayout
-        android:layout_width="0dp"
+    <ImageView
+        android:id="@+id/vehicle_icon"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/car" />
+
+    <ImageView
+        android:id="@+id/path_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_toRightOf="@id/vehicle_icon"
+        android:src="@drawable/path" />
+
+    <TextView
+        android:id="@+id/line_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="10dp">
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/path_icon"
+        android:maxWidth="200dp"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/weight_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/path_icon"
+        android:layout_below="@id/path_icon"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="3dp"
+        android:text="@string/weight"
+        android:textSize="9sp" />
+
+    <TextView
+        android:id="@+id/weight_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/weight_name"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/weight_name"
+        android:textSize="9sp" />
+
+    <TextView
+        android:id="@+id/vehicle_type_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/weight_name"
+        android:layout_below="@id/weight_name"
+        android:layout_marginTop="3dp"
+        android:text="@string/vehicle_type"
+        android:textSize="9sp" />
+
+    <TextView
+        android:id="@+id/vehicle_type_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/vehicle_type_name"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/vehicle_type_name"
+        android:maxWidth="100dp"
+        android:textSize="9sp" />
+
+    <TextView
+        android:id="@+id/action_time_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/vehicle_type_name"
+        android:layout_below="@id/vehicle_type_name"
+        android:layout_marginTop="3dp"
+        android:text="@string/time"
+        android:textSize="9sp" />
+
+    <TextView
+        android:id="@+id/task_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/action_time_name"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/action_time_name"
+        android:textSize="9sp" />
+
+    <RelativeLayout
+        android:id="@+id/remain_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+
         <ImageView
-            android:id="@+id/vehicle_icon"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:src="@drawable/car" />
-    </LinearLayout>
+            android:id="@+id/publish_time_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/publish_time" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:orientation="vertical"
-        android:layout_gravity="center_vertical">
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/publish_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="5dp" >
-
-            <ImageView
-                android:id="@+id/path_icon"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/path" />
-
-            <TextView
-                android:id="@+id/line_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textSize="14sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="3dp">
-            <TextView
-                android:id="@+id/weight_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/weight"
-                android:textSize="10sp" />
-
-            <TextView
-                android:id="@+id/weight_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textSize="10sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="3dp" >
-            <TextView
-                android:id="@+id/vehicle_type_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/vehicle_type"
-                android:textSize="10sp" />
-
-            <TextView
-                android:id="@+id/vehicle_type_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:maxWidth="80dp"
-                android:textSize="10sp" />
-
-            <TextView
-                android:id="@+id/vehicle_age_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="@string/vehicle_age"
-                android:textSize="10sp" />
-
-            <TextView
-                android:id="@+id/vehicle_age_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp" >
-            <TextView
-                android:id="@+id/action_time_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/time"
-                android:textSize="10sp" />
-
-            <TextView
-                android:id="@+id/task_duration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="5dp">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="3dp" >
-            <ImageView
-                android:id="@+id/publish_time_icon"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/publish_time"/>
-
-            <TextView
-                android:id="@+id/publish_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textSize="14sp"/>
-        </LinearLayout>
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/publish_time_icon"
+            android:textSize="12sp" />
 
         <ImageView
             android:id="@+id/enter_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_below="@id/publish_time_icon"
+            android:layout_centerInParent="true"
             android:layout_margin="5dp"
-            android:layout_gravity="center"
-            android:src="@drawable/enter"/>
-    </LinearLayout>
+            android:src="@drawable/enter" />
+    </RelativeLayout>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/vehicle_age_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/vehicle_type_name"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@id/remain_time"
+        android:textSize="9sp" />
+
+    <TextView
+        android:id="@+id/vehicle_age_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/vehicle_type_name"
+        android:layout_toLeftOf="@id/vehicle_age_value"
+        android:text="@string/vehicle_age"
+        android:textSize="9sp" />
+
+</RelativeLayout>
