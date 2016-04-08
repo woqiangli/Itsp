@@ -1,4 +1,4 @@
-package sf.com.itsp;
+package sf.com.itsp.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
+import sf.com.itsp.R;
 import sf.com.itsp.domain.Order;
 import sf.com.itsp.order.CarrierOrderAdapter;
 import sf.com.itsp.utils.ConnectionProxy;
@@ -59,14 +60,17 @@ public class MainActivity extends Activity {
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                gotoOrderDetailView();
+                Order order = adapter.getItem(position);
+                gotoOrderDetailView(order);
             }
         });
     }
 
-    private void gotoOrderDetailView() {
+    private void gotoOrderDetailView(Order order) {
         Intent intent = new Intent();
+        intent.putExtra("order", order);
         intent.setClass(getApplicationContext(), OrderDetailActivity.class);
+
         startActivity(intent);
     }
 }

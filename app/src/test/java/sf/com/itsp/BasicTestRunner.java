@@ -1,5 +1,5 @@
 
-package sf.com.testUtil;
+package sf.com.itsp;
 
 import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricGradleTestRunner;
