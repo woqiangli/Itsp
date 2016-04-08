@@ -12,4 +12,8 @@ public class ShadowConnectionProxy {
     public String requestOrder(Context context) {
         return orders;
     }
+
+    public static void clearOrders() {
+        orders = "[]";
+    }
 }

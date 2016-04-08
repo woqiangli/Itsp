@@ -1,8 +1,12 @@
 package sf.com.itsp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
@@ -51,5 +55,18 @@ public class MainActivity extends Activity {
         ListView listView = (ListView) findViewById(R.id.order_list);
         adapter = new CarrierOrderAdapter(getApplicationContext());
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                gotoOrderDetailView();
+            }
+        });
+    }
+
+    private void gotoOrderDetailView() {
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), OrderDetailActivity.class);
+        startActivity(intent);
     }
 }
