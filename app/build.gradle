@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'joda-time:joda-time:2.9.2'
     testCompile 'junit:junit:4.12'
     //    testCompile files('libs_test/powermock-api-mockito-1.5.4.jar')
@@ -33,5 +33,6 @@ dependencies {
     //    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.1'
     testCompile 'org.easytesting:fest-assert-core:2.0M10'
     compile 'com.google.guava:guava:19.0'
-//    testCompile 'com.googlecode.jmockit:jmockit:1.7'
+    //    testCompile 'com.googlecode.jmockit:jmockit:1.7'
+    compile 'com.android.support:support-v4:24.0.0-alpha1'
 }
