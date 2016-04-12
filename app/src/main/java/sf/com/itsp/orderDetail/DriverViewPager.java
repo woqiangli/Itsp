@@ -16,12 +16,12 @@ public class DriverViewPager extends FrameLayout{
     private ViewGroup driverViewGroup;
     private List<Integer> driverImageIds;
 
-    public DriverViewPager(Context context,List<DriverImageView> driverList) {
+    public DriverViewPager(Context context, List<DriverImageView> driverList) {
         super(context);
         creatView(context, driverList);
     }
 
-    public void creatView(Context context,List<DriverImageView> imageList){
+    public void creatView(Context context, List<DriverImageView> imageList){
         driverViewContext = context;
         LayoutInflater.from(context).inflate(R.layout.driver_view_pager, this);
         driverViewPager = (ViewPager)findViewById(R.id.viewpager);

@@ -29,7 +29,7 @@ public class OrderDetailActivity extends Activity {
 
         refreshUi();
 
-        initVehicleImage();
+        initDriverImage();
     }
 
     private void refreshUi() {
@@ -39,7 +39,7 @@ public class OrderDetailActivity extends Activity {
         targetView.setText(order.getTarget());
     }
 
-    private void initVehicleImage() {
+    private void initDriverImage() {
         driverImageIds = new int[]{
                 R.drawable.beijing_img,
                 R.drawable.shenzhen_img,

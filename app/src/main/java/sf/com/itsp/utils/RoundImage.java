@@ -9,6 +9,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
 import android.widget.ImageView;
 
 public class RoundImage extends ImageView{
@@ -18,6 +19,16 @@ public class RoundImage extends ImageView{
 
     public RoundImage(Context context) {
         super(context);
+        imageContext = context;
+    }
+
+    public RoundImage(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        imageContext = context;
+    }
+
+    public RoundImage(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
         imageContext = context;
     }
 
