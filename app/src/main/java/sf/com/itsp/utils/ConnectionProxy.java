@@ -21,8 +21,8 @@ public class ConnectionProxy {
 
     public String requestOrder(Context context) {
         ServerAddress serverAddress = PropertiesProvider.getInstance(context).getServerAddress();
-//        return new HttpClient(serverAddress.host, serverAddress.port).request("/orders");
-        return "[\n" +
+        return new HttpClient(serverAddress.host, serverAddress.port).request("/orders");
+        /*return "[\n" +
                 "  {\n" +
                 "    'original': '755A',\n" +
                 "    'target': '020A',\n" +
@@ -41,6 +41,11 @@ public class ConnectionProxy {
                 "    'weight': 1,\n" +
                 "    'vehicleAge': 4\n" +
                 "  }\n" +
-                "]";
+                "]";*/
+    }
+
+    public String requestVehicleList(Context context){
+        ServerAddress serverAddress = PropertiesProvider.getInstance(context).getServerAddress();
+        return new HttpClient(serverAddress.host, serverAddress.port).request("/getVehicleList");
     }
 }

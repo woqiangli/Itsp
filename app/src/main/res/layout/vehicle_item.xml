@@ -3,18 +3,28 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/vehicle_item_photo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:src="@drawable/car"
-        />
+        app:civ_border_width="2dp"
+        app:civ_border_color="#fff"/>
+    <ImageView
+        android:id="@+id/selected_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignRight="@id/vehicle_item_photo"
+        android:src="@drawable/enter"/>
     <TextView
         android:id="@+id/vehicle_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="12sp"
         android:text="adad"
         android:layout_below="@id/vehicle_item_photo"
+        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
         />
 

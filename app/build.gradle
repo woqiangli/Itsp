@@ -35,4 +35,5 @@ dependencies {
     compile 'com.google.guava:guava:19.0'
     //    testCompile 'com.googlecode.jmockit:jmockit:1.7'
     compile 'com.android.support:support-v4:18.0.0'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }
