@@ -18,6 +18,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activities.OrderDetailActivity"
+            android:label="@string/app_name">
+        </activity>
+
     </application>
 
 </manifest>
