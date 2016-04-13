@@ -2,12 +2,14 @@ package sf.com.itsp.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
-import java.util.ArrayList;
 import sf.com.itsp.R;
 import sf.com.itsp.domain.Order;
-import sf.com.itsp.orderDetail.DriverImageView;
-import sf.com.itsp.orderDetail.DriverViewPager;
+import sf.com.itsp.orderDetail.HorizontalListView;
 import static sf.com.itsp.utils.Constant.INTENT_KEY_ORDER;
 
 public class OrderDetailActivity extends Activity {
@@ -15,21 +17,20 @@ public class OrderDetailActivity extends Activity {
     private TextView originView;
     private TextView targetView;
 
-    private int[] driverImageIds;
-    private DriverViewPager driverViewPager;
-    private ArrayList<DriverImageView> driverImageViews;
+    private HorizontalListView listview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_detail_activity);
 
-        originView = (TextView) findViewById(R.id.origin_view);
-        targetView = (TextView) findViewById(R.id.target_view);
+//        originView = (TextView) findViewById(R.id.origin_view);
+//        targetView = (TextView) findViewById(R.id.target_view);
+//
+//        refreshUi();
 
-        refreshUi();
+        initializeViews();
 
-        initDriverImage();
     }
 
     private void refreshUi() {
@@ -39,23 +40,34 @@ public class OrderDetailActivity extends Activity {
         targetView.setText(order.getTarget());
     }
 
-    private void initDriverImage() {
-        driverImageIds = new int[]{
-                R.drawable.beijing_img,
-                R.drawable.shenzhen_img,
-                R.drawable.guangzhou_img
-        };
+    private void initializeViews() {
+        listview = (HorizontalListView) findViewById(R.id.driver_image_list);
 
-        driverViewPager = (DriverViewPager)findViewById(R.id.view_pager_show);
+        listview.setAdapter(new MyAdapter());
+    }
 
-        driverImageViews = new ArrayList<DriverImageView>();
-        for (int i = 0 ; i < driverImageIds.length ; i ++){
-            DriverImageView imageView = new DriverImageView(this);
-            imageView.setImage(driverImageIds[i]);
-            driverImageViews.add(imageView);
+    class MyAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return 10;
         }
 
-        driverViewPager.creatView(this, driverImageViews);
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.driver_view_item, null);
+            return view;
+        }
     }
 
 }
