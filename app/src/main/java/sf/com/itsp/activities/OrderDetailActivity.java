@@ -27,39 +27,47 @@ public class OrderDetailActivity extends Activity {
     private TextView targetView;
     private HorizontalListView vehicleList;
     private VehicleAdapter vehicleAdapter;
-    private List<VehicleModel> vehicleModelList = new ArrayList<VehicleModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_detail_activity);
-        requestVehicleList();
+        initUi();
         refreshUi();
     }
 
+    private void initUi() {
+        originView = (TextView) findViewById(R.id.origin_view);
+        targetView = (TextView) findViewById(R.id.target_view);
+        initVehicleList();
+    }
+
     private void requestVehicleList() {
-        for(int i=0; i <20;i++){
-            VehicleModel vehicleModel = new VehicleModel();
-            vehicleModel.setName("user"+i);
-            vehicleModel.setPhoto(R.drawable.car);
-            vehicleModel.setIsSelected(true);
-            vehicleModelList.add(vehicleModel);
-        }
+        new AsyncTask<Void, Void, String>() {
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                return ConnectionProxy.getInstance().requestVehicleList(getApplicationContext());
+            }
+
+            @Override
+            protected void onPostExecute(String json) {
+                List<VehicleModel> tempList = JsonConverter.jsonFromObjectList(json, TypeToken.get(VehicleModel[].class));
+                vehicleAdapter.loadData(tempList);
+            }
+        }.execute();
     }
 
 
     private void refreshUi() {
         Order order = (Order) getIntent().getSerializableExtra(INTENT_KEY_ORDER);
-        originView = (TextView) findViewById(R.id.origin_view);
-        targetView = (TextView) findViewById(R.id.target_view);
         originView.setText(order.getOriginal());
         targetView.setText(order.getTarget());
-
-        initVehicleList();
+        requestVehicleList();
     }
 
     private void initVehicleList() {
-        vehicleAdapter = new VehicleAdapter(this, R.layout.vehicle_item,vehicleModelList);
+        vehicleAdapter = new VehicleAdapter(this, R.layout.vehicle_item);
         vehicleList = (HorizontalListView) findViewById(R.id.vehicle_list);
         vehicleList.setAdapter(vehicleAdapter);
     }

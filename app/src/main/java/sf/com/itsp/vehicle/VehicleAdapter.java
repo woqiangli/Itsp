@@ -17,8 +17,8 @@ import sf.com.itsp.domain.Vehicle;
 public class VehicleAdapter extends ArrayAdapter<VehicleModel> {
     private int itemLayout;
 
-    public VehicleAdapter(Context context, int textViewResourceId, List<VehicleModel> vehicleModelList) {
-        super(context, textViewResourceId, vehicleModelList);
+    public VehicleAdapter(Context context, int textViewResourceId) {
+        super(context, textViewResourceId);
         itemLayout = textViewResourceId;
     }
 
@@ -33,6 +33,10 @@ public class VehicleAdapter extends ArrayAdapter<VehicleModel> {
         name.setText(vehicleModel.getName());
         selectedIcon.setVisibility(vehicleModel.getIsSelected() ? ImageView.VISIBLE : ImageView.INVISIBLE);
         return vehicleItem;
+    }
+
+    public void loadData(List<VehicleModel> vehicleModelList){
+        this.addAll(vehicleModelList);
     }
 
 }
