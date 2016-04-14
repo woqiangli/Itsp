@@ -2,8 +2,15 @@ package sf.com.itsp.utils;
 
 import android.content.Context;
 
+import com.google.gson.reflect.TypeToken;
+
+import java.util.List;
+
 import sf.com.itsp.connectivity.HttpClient;
+import sf.com.itsp.domain.Driver;
+import sf.com.itsp.domain.Order;
 import sf.com.itsp.domain.ServerAddress;
+import sf.com.itsp.domain.Vehicle;
 
 import static sf.com.itsp.utils.ConnectionProxy.RequestPath.Drivers;
 import static sf.com.itsp.utils.ConnectionProxy.RequestPath.Orders;
@@ -23,32 +30,40 @@ public class ConnectionProxy {
 
     }
 
-    public String requestOrder(Context context) {
-        return Orders.request(context);
+    public List<Order> requestOrder(Context context) {
+        return (List<Order>) Orders.request(context);
     }
 
-    public String requestVehicleList(Context context) {
-        return Vehicles.request(context);
+    public List<Vehicle> requestVehicleList(Context context) {
+        return (List<Vehicle>) Vehicles.request(context);
     }
 
-    public String requestDriver(Context context) {
-        return Drivers.request(context);
+    public List<Driver> requestDriver(Context context) {
+        return (List<Driver>) Drivers.request(context);
     }
 
     public enum RequestPath {
-        Orders("orders"),
-        Vehicles("vehicles"),
-        Drivers("drivers");
+        Orders("orders", Order[].class),
+        Drivers("drivers", Driver[].class),
+        Vehicles("vehicles", Vehicle[].class);
 
         private final String path;
+        private final TypeToken typeToken;
 
-        RequestPath(String path) {
+        RequestPath(String path, Class clazz) {
             this.path = path;
+            this.typeToken = TypeToken.get(clazz);
         }
 
-        public String request(Context context) {
+        public List<?> request(Context context) {
             ServerAddress serverAddress = PropertiesProvider.getInstance(context).getServerAddress();
-            return new HttpClient(serverAddress.host, serverAddress.port).request(path);
+            String request = new HttpClient(serverAddress.host, serverAddress.port).request(path);
+
+            return convert(request);
+        }
+
+        public List<?> convert(String dataAsJson) {
+            return JsonConverter.jsonFromObjectList(dataAsJson, typeToken);
         }
     }
 }

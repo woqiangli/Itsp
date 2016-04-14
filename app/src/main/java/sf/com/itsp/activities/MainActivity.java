@@ -9,15 +9,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.util.List;
 
 import sf.com.itsp.R;
 import sf.com.itsp.domain.Order;
 import sf.com.itsp.order.CarrierOrderAdapter;
 import sf.com.itsp.utils.ConnectionProxy;
-import sf.com.itsp.utils.JsonConverter;
 
 public class MainActivity extends Activity {
     private CarrierOrderAdapter adapter;
@@ -32,24 +29,23 @@ public class MainActivity extends Activity {
     }
 
     private void requestOrder() {
-        AsyncTask<Void, Void, String> asyncTask = new AsyncTask<Void, Void, String>() {
+        AsyncTask<Void, Void, List> asyncTask = new AsyncTask<Void, Void, List>() {
             @Override
-            protected String doInBackground(Void... params) {
+            protected List doInBackground(Void... params) {
                 return ConnectionProxy.getInstance().requestOrder(getApplicationContext());
             }
 
             @Override
-            protected void onPostExecute(String orderAsJson) {
-                refreshListView(orderAsJson);
+            protected void onPostExecute(List orders) {
+                refreshListView(orders);
             }
         };
 
         asyncTask.execute();
     }
 
-    private void refreshListView(String orderAsJson) {
-        List<Order> orderList = JsonConverter.jsonFromObjectList(orderAsJson, TypeToken.get(Order[].class));
-        adapter.setOrderList(orderList);
+    private void refreshListView(List orders) {
+        adapter.setOrderList(orders);
     }
 
     private void initListView() {
