@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'joda-time:joda-time:2.9.2'
     testCompile 'junit:junit:4.12'
     //    testCompile files('libs_test/powermock-api-mockito-1.5.4.jar')
@@ -35,4 +35,7 @@ dependencies {
     compile 'com.google.guava:guava:19.0'
     //    testCompile 'com.googlecode.jmockit:jmockit:1.7'
     compile 'com.android.support:support-v4:24.0.0-alpha1'
+    //    testCompile 'com.googlecode.jmockit:jmockit:1.7'
+    compile 'com.android.support:support-v4:18.0.0'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }
