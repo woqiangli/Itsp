@@ -31,6 +31,7 @@ public class HttpClient {
 
     private String host;
     private int port;
+    private final static String URL_JOINER = "/";
 
     private Map<String, String> propertiesMap = new HashMap<String, String>();
 
@@ -41,11 +42,12 @@ public class HttpClient {
 
     public String request(String path) {
         try {
-            HttpURLConnection connection = initConnection(path);
+            HttpURLConnection connection = initConnection(URL_JOINER + path);
             return getResponse(connection);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return "";
     }
 

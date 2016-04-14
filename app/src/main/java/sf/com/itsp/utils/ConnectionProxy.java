@@ -5,6 +5,10 @@ import android.content.Context;
 import sf.com.itsp.connectivity.HttpClient;
 import sf.com.itsp.domain.ServerAddress;
 
+import static sf.com.itsp.utils.ConnectionProxy.RequestPath.Drivers;
+import static sf.com.itsp.utils.ConnectionProxy.RequestPath.Orders;
+import static sf.com.itsp.utils.ConnectionProxy.RequestPath.Vehicles;
+
 public class ConnectionProxy {
     private static ConnectionProxy instance;
 
@@ -20,37 +24,31 @@ public class ConnectionProxy {
     }
 
     public String requestOrder(Context context) {
-        ServerAddress serverAddress = PropertiesProvider.getInstance(context).getServerAddress();
-        return new HttpClient(serverAddress.host, serverAddress.port).request("/orders");
-        /*return "[\n" +
-                "  {\n" +
-                "    'original': '755A',\n" +
-                "    'target': '020A',\n" +
-                "    'vehicleType': '货柜车',\n" +
-                "    'startDate': '2016-03-11',\n" +
-                "    'endDate': '2016-03-14',\n" +
-                "    'weight': 2,\n" +
-                "    'vehicleAge': 3\n" +
-                "  },\n" +
-                "  {\n" +
-                "    'original': '754A',\n" +
-                "    'target': '021A',\n" +
-                "    'vehicleType': '货柜车2',\n" +
-                "    'startDate': '2016-03-11',\n" +
-                "    'endDate': '2016-03-14',\n" +
-                "    'weight': 1,\n" +
-                "    'vehicleAge': 4\n" +
-                "  }\n" +
-                "]";*/
+        return Orders.request(context);
     }
 
-    public String requestVehicleList(Context context){
-        ServerAddress serverAddress = PropertiesProvider.getInstance(context).getServerAddress();
-        return new HttpClient(serverAddress.host, serverAddress.port).request("/getVehicleList");
+    public String requestVehicleList(Context context) {
+        return Vehicles.request(context);
     }
 
     public String requestDriver(Context context) {
-        ServerAddress serverAddress = PropertiesProvider.getInstance(context).getServerAddress();
-        return new HttpClient(serverAddress.host, serverAddress.port).request("/drivers");
+        return Drivers.request(context);
+    }
+
+    public enum RequestPath {
+        Orders("orders"),
+        Vehicles("vehicles"),
+        Drivers("drivers");
+
+        private final String path;
+
+        RequestPath(String path) {
+            this.path = path;
+        }
+
+        public String request(Context context) {
+            ServerAddress serverAddress = PropertiesProvider.getInstance(context).getServerAddress();
+            return new HttpClient(serverAddress.host, serverAddress.port).request(path);
+        }
     }
 }
