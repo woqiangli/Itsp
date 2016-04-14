@@ -29,9 +29,9 @@ public class VehicleAdapter extends ArrayAdapter<VehicleModel> {
         TextView name = (TextView) vehicleItem.findViewById(R.id.vehicle_item_name);
         ImageView selectedIcon = (ImageView) vehicleItem.findViewById(R.id.selected_icon);
         VehicleModel vehicleModel = getItem(position);
-        photo.setImageResource(vehicleModel.getPhoto());
-        name.setText(vehicleModel.getName());
-        selectedIcon.setVisibility(vehicleModel.getIsSelected() ? ImageView.VISIBLE : ImageView.INVISIBLE);
+        photo.setImageResource(vehicleModel.getVehicle().getPhoto());
+        name.setText(vehicleModel.getVehicle().getNumber());
+        selectedIcon.setVisibility(vehicleModel.isSelected() ? ImageView.VISIBLE : ImageView.INVISIBLE);
         return vehicleItem;
     }
 
