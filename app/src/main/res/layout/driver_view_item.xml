@@ -6,9 +6,9 @@
     android:gravity="center" >
 
     <sf.com.itsp.utils.RoundImage
+        android:id="@+id/driver_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:src="@drawable/shenzhen_img" />
+        android:layout_gravity="center" />
 
 </LinearLayout>

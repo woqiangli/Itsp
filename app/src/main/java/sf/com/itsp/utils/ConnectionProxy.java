@@ -23,4 +23,9 @@ public class ConnectionProxy {
         ServerAddress serverAddress = PropertiesProvider.getInstance(context).getServerAddress();
         return new HttpClient(serverAddress.host, serverAddress.port).request("/orders");
     }
+
+    public String requestDriver(Context context) {
+        ServerAddress serverAddress = PropertiesProvider.getInstance(context).getServerAddress();
+        return new HttpClient(serverAddress.host, serverAddress.port).request("/drivers");
+    }
 }
