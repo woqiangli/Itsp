@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
     }
 
     private void refreshListView(List orders) {
-        adapter.setOrderList(orders);
+        adapter.setItems(orders);
     }
 
     private void initListView() {

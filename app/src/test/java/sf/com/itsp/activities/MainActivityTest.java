@@ -1,14 +1,11 @@
 package sf.com.itsp.activities;
 
-import android.content.Intent;
 import android.widget.ListView;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.util.ActivityController;
 
 import java.io.Serializable;
@@ -20,17 +17,15 @@ import sf.com.itsp.shadows.ShadowConnectionProxy;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.robolectric.Robolectric.buildActivity;
-import static org.robolectric.Shadows.shadowOf;
 import static org.robolectric.shadows.ShadowApplication.runBackgroundTasks;
 import static sf.com.itsp.testHelper.condition.ActivityStartedCondition.startedActivity;
 import static sf.com.itsp.testHelper.condition.ContainsTextCondition.text;
 import static sf.com.itsp.testHelper.condition.ListViewChildCondition.childWith;
 import static sf.com.itsp.testHelper.condition.ListViewContainsItemsCondition.numberOfItems;
-import static sf.com.itsp.utils.OrderProvider.mockEmptyOrderResponse;
 import static sf.com.itsp.utils.OrderProvider.mockOrderResponse;
 
 @RunWith(BasicTestRunner.class)
-@Config(constants = BuildConfig.class, shadows = {ShadowConnectionProxy.class})
+@Config(constants = BuildConfig.class, sdk = 17, shadows = {ShadowConnectionProxy.class})
 public class MainActivityTest {
 
     @After

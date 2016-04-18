@@ -5,12 +5,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
-import com.google.gson.reflect.TypeToken;
+import com.google.common.collect.Iterables;
 import com.meetme.android.horizontallistview.HorizontalListView;
 
-import java.util.Iterator;
 import java.util.List;
 
 import sf.com.itsp.R;
@@ -18,12 +15,14 @@ import sf.com.itsp.domain.Driver;
 import sf.com.itsp.domain.Vehicle;
 import sf.com.itsp.orderDetail.DriverViewAdapter;
 import sf.com.itsp.utils.ConnectionProxy;
-import sf.com.itsp.utils.JsonConverter;
 import sf.com.itsp.vehicle.VehicleAdapter;
 import sf.com.itsp.vehicle.VehicleModel;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 public class OrderDetailActivity extends Activity {
 
+    private HorizontalListView vehicleList;
     private VehicleAdapter vehicleAdapter;
 
     private DriverViewAdapter adapter;
@@ -43,44 +42,39 @@ public class OrderDetailActivity extends Activity {
 
     private void requestVehicleList() {
         new AsyncTask<Void, Void, List<Vehicle>>() {
-
             @Override
             protected List<Vehicle> doInBackground(Void... voids) {
                 return ConnectionProxy.getInstance().requestVehicleList(getApplicationContext());
             }
 
             @Override
-            protected void onPostExecute(List<Vehicle> vehicleList) {
-                Iterator<VehicleModel> vehicleModelIterator = Iterators.transform(vehicleList.iterator(), new Function<Vehicle, VehicleModel>() {
+            protected void onPostExecute(List<Vehicle> vehicles) {
+                vehicleAdapter.loadData(newArrayList(Iterables.transform(vehicles, new Function<Vehicle, VehicleModel>() {
                     @Override
                     public VehicleModel apply(Vehicle vehicle) {
                         return VehicleModel.fromVehicle(vehicle);
                     }
-                });
-                vehicleAdapter.loadData(Lists.newArrayList(vehicleModelIterator));
+                })));
             }
         }.execute();
     }
 
     private void requestDriver() {
-        AsyncTask<Void, Void, String> asyncTask = new AsyncTask<Void, Void, String>() {
+        new AsyncTask<Void, Void, List<Driver>>() {
             @Override
-            protected String doInBackground(Void... params) {
-                //return ConnectionProxy.getInstance().requestDriver(getApplicationContext());
-                return "";
+            protected List<Driver> doInBackground(Void... params) {
+                return ConnectionProxy.getInstance().requestDriver(getApplicationContext());
             }
 
             @Override
-            protected void onPostExecute(String driverAsJson) {
-                refreshListView(driverAsJson);
+            protected void onPostExecute(List<Driver> drivers) {
+                refreshListView(drivers);
             }
-        };
-        asyncTask.execute();
+        }.execute();
     }
 
-    private void refreshListView(String driverAsJson) {
-        List<Driver> driverList = JsonConverter.jsonFromObjectList(driverAsJson, TypeToken.get(Driver[].class));
-        adapter.setDriverList(driverList);
+    private void refreshListView(List<Driver> drivers) {
+        adapter.setItems(drivers);
     }
 
     private void refreshUi() {
@@ -90,7 +84,7 @@ public class OrderDetailActivity extends Activity {
 
     private void initVehicleList() {
         vehicleAdapter = new VehicleAdapter(this, R.layout.vehicle_item);
-        HorizontalListView vehicleList = (HorizontalListView) findViewById(R.id.vehicle_list);
+        vehicleList = (HorizontalListView) findViewById(R.id.vehicle_list);
         vehicleList.setAdapter(vehicleAdapter);
     }
 
@@ -98,7 +92,5 @@ public class OrderDetailActivity extends Activity {
         adapter = new DriverViewAdapter(getApplicationContext());
         sf.com.itsp.orderDetail.HorizontalListView listView = (sf.com.itsp.orderDetail.HorizontalListView) findViewById(R.id.driver_image_list);
         listView.setAdapter(adapter);
-
-
     }
 }
