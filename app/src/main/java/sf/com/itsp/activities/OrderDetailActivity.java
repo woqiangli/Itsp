@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.meetme.android.horizontallistview.HorizontalListView;
 
 import java.util.List;
@@ -17,8 +18,6 @@ import sf.com.itsp.orderDetail.DriverViewAdapter;
 import sf.com.itsp.utils.ConnectionProxy;
 import sf.com.itsp.vehicle.VehicleAdapter;
 import sf.com.itsp.vehicle.VehicleModel;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 public class OrderDetailActivity extends Activity {
 
@@ -48,13 +47,14 @@ public class OrderDetailActivity extends Activity {
             }
 
             @Override
-            protected void onPostExecute(List<Vehicle> vehicles) {
-                vehicleAdapter.loadData(newArrayList(Iterables.transform(vehicles, new Function<Vehicle, VehicleModel>() {
+            protected void onPostExecute(List<Vehicle> vehicleList) {
+                Iterable<VehicleModel> transform = Iterables.transform(vehicleList, new Function<Vehicle, VehicleModel>() {
                     @Override
                     public VehicleModel apply(Vehicle vehicle) {
                         return VehicleModel.fromVehicle(vehicle);
                     }
-                })));
+                });
+                vehicleAdapter.loadData(Lists.newArrayList(transform));
             }
         }.execute();
     }
