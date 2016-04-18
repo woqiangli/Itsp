@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
@@ -43,7 +44,6 @@ public class OrderDetailActivity extends Activity {
 
     private void requestVehicleList() {
         new AsyncTask<Void, Void, List<Vehicle>>() {
-
             @Override
             protected List<Vehicle> doInBackground(Void... voids) {
                 return ConnectionProxy.getInstance().requestVehicleList(getApplicationContext());
@@ -51,13 +51,13 @@ public class OrderDetailActivity extends Activity {
 
             @Override
             protected void onPostExecute(List<Vehicle> vehicleList) {
-                Iterator<VehicleModel> vehicleModelIterator = Iterators.transform(vehicleList.iterator(), new Function<Vehicle, VehicleModel>() {
+                Iterable<VehicleModel> transform = Iterables.transform(vehicleList, new Function<Vehicle, VehicleModel>() {
                     @Override
                     public VehicleModel apply(Vehicle vehicle) {
                         return VehicleModel.fromVehicle(vehicle);
                     }
                 });
-                vehicleAdapter.loadData(Lists.newArrayList(vehicleModelIterator));
+                vehicleAdapter.loadData(Lists.newArrayList(transform));
             }
         }.execute();
     }
