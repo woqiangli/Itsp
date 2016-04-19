@@ -5,6 +5,10 @@ import sf.com.itsp.domain.Vehicle;
 public class VehicleModel {
     private Vehicle vehicle;
 
+    public void setIsSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+
     private boolean isSelected;
 
     public static VehicleModel fromVehicle(Vehicle vehicle) {

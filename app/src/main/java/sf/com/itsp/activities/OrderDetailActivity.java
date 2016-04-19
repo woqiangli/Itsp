@@ -3,6 +3,8 @@ package sf.com.itsp.activities;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -85,7 +87,19 @@ public class OrderDetailActivity extends Activity {
     private void initVehicleList() {
         vehicleAdapter = new VehicleAdapter(getApplicationContext());
         vehicleList = (HorizontalListView) findViewById(R.id.vehicle_list);
+        vehicleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                clickVehicleItem(i);
+            }
+        });
         vehicleList.setAdapter(vehicleAdapter);
+    }
+
+    private void clickVehicleItem(int i) {
+        VehicleModel item = vehicleAdapter.getItem(i);
+        item.setIsSelected(!item.isSelected());
+        vehicleAdapter.notifyDataSetChanged();
     }
 
     private void initDriverListView() {
