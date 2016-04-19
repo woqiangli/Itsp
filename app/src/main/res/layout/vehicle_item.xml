@@ -13,16 +13,16 @@
         app:civ_border_color="#fff"/>
     <ImageView
         android:id="@+id/selected_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignRight="@id/vehicle_item_photo"
-        android:src="@drawable/enter"/>
+        android:src="@drawable/selected"/>
     <TextView
         android:id="@+id/vehicle_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
-        android:text="adad"
+        android:text="number"
         android:layout_below="@id/vehicle_item_photo"
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
