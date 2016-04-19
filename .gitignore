@@ -9,6 +9,7 @@
 gradle/
 .idea/misc.xml
 .idea/vcs.xml
+app/src/main/res/raw/app_config.properties
 
 
 # Built application files

@@ -54,7 +54,7 @@ public class OrderDetailActivity extends Activity {
                         return VehicleModel.fromVehicle(vehicle);
                     }
                 });
-                vehicleAdapter.loadData(Lists.newArrayList(transform));
+                vehicleAdapter.setItems(Lists.newArrayList(transform));
             }
         }.execute();
     }
@@ -83,7 +83,7 @@ public class OrderDetailActivity extends Activity {
     }
 
     private void initVehicleList() {
-        vehicleAdapter = new VehicleAdapter(this, R.layout.vehicle_item);
+        vehicleAdapter = new VehicleAdapter(getApplicationContext());
         vehicleList = (HorizontalListView) findViewById(R.id.vehicle_list);
         vehicleList.setAdapter(vehicleAdapter);
     }
