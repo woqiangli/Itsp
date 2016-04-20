@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--after click-->
+    <item android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="#99f9a6" />
+                    <corners android:radius="3dp" />
+                    <stroke
+                        android:dashGap="0dp"
+                        android:dashWidth="4dp"
+                        android:color="#fff"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
 
-    <solid android:color="#fff" />
-    <corners android:radius="10dp" />
+    <!-- init status -->
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="4dp" />
+                    <gradient
+                        android:startColor="#f5f5f5"
+                        android:centerColor="#f5383838"
+                        android:endColor="#f5f5f5"
+                        android:angle="270"/>
+                </shape>
+            </item>
 
-</shape>
-
+            <item android:bottom="6dp" android:top="6dp" android:left="4dp" android:right="4dp">
+                <shape>
+                    <solid android:color="#fff" />
+                    <corners android:radius="4dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

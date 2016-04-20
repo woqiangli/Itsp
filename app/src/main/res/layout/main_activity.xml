@@ -3,14 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
+    android:background="#fff"
     android:paddingTop="90dp">
 
     <ListView
         android:id="@+id/order_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/round_corner_out"
-        android:padding="8dp">
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
     </ListView>
 
 </RelativeLayout>
