@@ -15,46 +15,37 @@ import static com.google.common.collect.Lists.newArrayList;
 
 @Implements(ConnectionProxy.class)
 public class ShadowConnectionProxy {
-
     private static List<Order> orders = newArrayList();
-
     private static List<Driver> drivers = newArrayList();
-
     private static List<Vehicle> vehicles = newArrayList();
-
-    public List<Order> requestOrder(Context context) {
-        return orders;
-    }
 
     public static void fakeOrders(List<Order> fakedOrders) {
         orders = fakedOrders;
     }
 
-    public static void clearOrders() {
+    public static void clearAll() {
         orders = newArrayList();
-    }
-
-    public List<Driver> requestDriver(Context context) {
-        return drivers;
+        vehicles = newArrayList();
+        drivers = newArrayList();
     }
 
     public static void fakeDrivers(List<Driver> fakedDrivers) {
         drivers = fakedDrivers;
     }
 
-    public static void clearDrivers() {
-        drivers = newArrayList();
-    }
-
-    public List<Vehicle> requestVehicle(Context context) {
-        return vehicles;
-    }
-
     public static void fakeVehicles(List<Vehicle> fakeVehicles) {
         vehicles = fakeVehicles;
     }
 
-    public static void clearVehicles() {
-        vehicles = newArrayList();
+    public List<Order> requestOrder(Context context) {
+        return orders;
+    }
+
+    public List<Driver> requestDriver(Context context) {
+        return drivers;
+    }
+
+    public List<Vehicle> requestVehicle(Context context) {
+        return vehicles;
     }
 }

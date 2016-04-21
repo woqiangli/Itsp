@@ -5,6 +5,7 @@ import android.content.Intent;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ActivityController;
@@ -21,7 +22,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Robolectric.buildActivity;
 import static org.robolectric.shadows.ShadowApplication.runBackgroundTasks;
-import static sf.com.itsp.testHelper.condition.ListViewContainsItemsCondition.numberOfItems;
+import static sf.com.itsp.testHelper.condition.HorizontalListItemCondition.numberOfItems;
 import static sf.com.itsp.utils.DriverProvider.mockDriverResponse;
 
 @RunWith(BasicTestRunner.class)
@@ -29,7 +30,7 @@ import static sf.com.itsp.utils.DriverProvider.mockDriverResponse;
 public class OrderDetailActivityTest {
     @After
     public void teardown() {
-        ShadowConnectionProxy.clearDrivers();
+        ShadowConnectionProxy.clearAll();
     }
 
     @Test
@@ -46,7 +47,7 @@ public class OrderDetailActivityTest {
                 .get();
 
         // when
-       //TextView originView = (TextView) orderDetailActivity.findViewById(R.id.origin_view);
+        //TextView originView = (TextView) orderDetailActivity.findViewById(R.id.origin_view);
         //TextView targetView = (TextView) orderDetailActivity.findViewById(R.id.target_view);
 
         // then
@@ -63,32 +64,18 @@ public class OrderDetailActivityTest {
 
     @Test
     public void should_display_drivers_on_order_detail_activity() {
-        //given
+        // given
         mockDriverResponse();
-        ActivityController<OrderDetailActivity> orderDetailActivityActivityController = buildActivity(OrderDetailActivity.class);
-        OrderDetailActivity orderDetailActivity = orderDetailActivityActivityController.get();
-        
-        //when
+
+        ActivityController<OrderDetailActivity> orderDetailActivityActivityController = Robolectric.buildActivity(OrderDetailActivity.class);
+
+        // when
         orderDetailActivityActivityController.create();
+        OrderDetailActivity orderDetailActivity = orderDetailActivityActivityController.get();
         HorizontalListView driverListView = (HorizontalListView) orderDetailActivity.findViewById(R.id.driver_image_list);
         runBackgroundTasks();
 
-        //then
+        // then
         assertThat(driverListView).has(numberOfItems(3));
     }
-
-//    @Test
-//    public void should_display_vehicles_on_order_detail_activity() {
-//        //given
-//        mockVehicleResponse();
-//        ActivityController<OrderDetailActivity> orderDetailActivityActivityController = buildActivity(OrderDetailActivity.class);
-//        OrderDetailActivity orderDetailActivity = orderDetailActivityActivityController.get();
-//
-//        //when
-//        orderDetailActivityActivityController.create();
-//        HorizontalListView vehicleListView = (HorizontalListView) orderDetailActivity.findViewById(R.id.vehicle_list);
-//
-//        //then
-//        assertThat(vehicleListView).has(childWith(text("1")));
-//    }
 }

@@ -30,7 +30,7 @@ public class OrderProvider {
             "]";
 
     public static void mockEmptyOrderResponse() {
-        ShadowConnectionProxy.clearOrders();
+        ShadowConnectionProxy.clearAll();
     }
 
     public static void mockOrderResponse() {

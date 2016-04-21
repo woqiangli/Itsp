@@ -6,16 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.meetme.android.horizontallistview.HorizontalListView;
 
 import java.util.List;
 
 import sf.com.itsp.R;
 import sf.com.itsp.domain.Driver;
-import sf.com.itsp.domain.Vehicle;
 import sf.com.itsp.orderDetail.DriverViewAdapter;
 import sf.com.itsp.utils.ConnectionProxy;
 import sf.com.itsp.vehicle.VehicleAdapter;
@@ -42,23 +38,23 @@ public class OrderDetailActivity extends Activity {
     }
 
     private void requestVehicleList() {
-        new AsyncTask<Void, Void, List<Vehicle>>() {
-            @Override
-            protected List<Vehicle> doInBackground(Void... voids) {
-                return ConnectionProxy.getInstance().requestVehicleList(getApplicationContext());
-            }
-
-            @Override
-            protected void onPostExecute(List<Vehicle> vehicleList) {
-                Iterable<VehicleModel> transform = Iterables.transform(vehicleList, new Function<Vehicle, VehicleModel>() {
-                    @Override
-                    public VehicleModel apply(Vehicle vehicle) {
-                        return VehicleModel.fromVehicle(vehicle);
-                    }
-                });
-                vehicleAdapter.setItems(Lists.newArrayList(transform));
-            }
-        }.execute();
+//        new AsyncTask<Void, Void, List<Vehicle>>() {
+//            @Override
+//            protected List<Vehicle> doInBackground(Void... voids) {
+//                return ConnectionProxy.getInstance().requestVehicleList(getApplicationContext());
+//            }
+//
+//            @Override
+//            protected void onPostExecute(List<Vehicle> vehicleList) {
+//                Iterable<VehicleModel> transform = Iterables.transform(vehicleList, new Function<Vehicle, VehicleModel>() {
+//                    @Override
+//                    public VehicleModel apply(Vehicle vehicle) {
+//                        return VehicleModel.fromVehicle(vehicle);
+//                    }
+//                });
+//                vehicleAdapter.setItems(Lists.newArrayList(transform));
+//            }
+//        }.execute();
     }
 
     private void requestDriver() {
