@@ -21,7 +21,7 @@ import static org.robolectric.shadows.ShadowApplication.runBackgroundTasks;
 import static sf.com.itsp.testHelper.condition.ActivityStartedCondition.startedActivity;
 import static sf.com.itsp.testHelper.condition.ContainsTextCondition.text;
 import static sf.com.itsp.testHelper.condition.ListViewChildCondition.childWith;
-import static sf.com.itsp.testHelper.condition.ListViewContainsItemsCondition.numberOfItems;
+import static sf.com.itsp.testHelper.condition.ListViewContainsItemCondition.numberOfItems;
 import static sf.com.itsp.utils.OrderProvider.mockOrderResponse;
 
 @RunWith(BasicTestRunner.class)
@@ -30,7 +30,7 @@ public class MainActivityTest {
 
     @After
     public void teardown() {
-        ShadowConnectionProxy.clearOrders();
+        ShadowConnectionProxy.clearAll();
     }
 
     @Test

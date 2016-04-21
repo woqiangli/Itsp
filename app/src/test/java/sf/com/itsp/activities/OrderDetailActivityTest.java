@@ -1,28 +1,37 @@
 package sf.com.itsp.activities;
 
 import android.content.Intent;
-import android.widget.TextView;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ActivityController;
 
 import sf.com.itsp.BasicTestRunner;
 import sf.com.itsp.BuildConfig;
 import sf.com.itsp.R;
 import sf.com.itsp.domain.Order;
+import sf.com.itsp.orderDetail.HorizontalListView;
 import sf.com.itsp.shadows.ShadowConnectionProxy;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Robolectric.buildActivity;
-import static sf.com.itsp.testHelper.condition.ContainsTextCondition.text;
+import static org.robolectric.shadows.ShadowApplication.runBackgroundTasks;
+import static sf.com.itsp.testHelper.condition.HorizontalListItemCondition.numberOfItems;
+import static sf.com.itsp.utils.DriverProvider.mockDriverResponse;
 
 @RunWith(BasicTestRunner.class)
-@Config(constants = BuildConfig.class, shadows = {ShadowConnectionProxy.class})
+@Config(constants = BuildConfig.class, sdk = 17, shadows = {ShadowConnectionProxy.class})
 public class OrderDetailActivityTest {
+    @After
+    public void teardown() {
+        ShadowConnectionProxy.clearAll();
+    }
 
     @Test
     public void should_display_order_line_on_order_detail_activity() {
@@ -38,7 +47,7 @@ public class OrderDetailActivityTest {
                 .get();
 
         // when
-       //TextView originView = (TextView) orderDetailActivity.findViewById(R.id.origin_view);
+        //TextView originView = (TextView) orderDetailActivity.findViewById(R.id.origin_view);
         //TextView targetView = (TextView) orderDetailActivity.findViewById(R.id.target_view);
 
         // then
@@ -51,5 +60,22 @@ public class OrderDetailActivityTest {
         when(mockOrder.getOriginal()).thenReturn(original);
         when(mockOrder.getTarget()).thenReturn(target);
         return mockOrder;
+    }
+
+    @Test
+    public void should_display_drivers_on_order_detail_activity() {
+        // given
+        mockDriverResponse();
+
+        ActivityController<OrderDetailActivity> orderDetailActivityActivityController = Robolectric.buildActivity(OrderDetailActivity.class);
+
+        // when
+        orderDetailActivityActivityController.create();
+        OrderDetailActivity orderDetailActivity = orderDetailActivityActivityController.get();
+        HorizontalListView driverListView = (HorizontalListView) orderDetailActivity.findViewById(R.id.driver_image_list);
+        runBackgroundTasks();
+
+        // then
+        assertThat(driverListView).has(numberOfItems(3));
     }
 }
