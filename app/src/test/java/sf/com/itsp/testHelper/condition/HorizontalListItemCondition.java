@@ -3,8 +3,6 @@ package sf.com.itsp.testHelper.condition;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 
-import sf.com.itsp.orderDetail.HorizontalListView;
-
 public class HorizontalListItemCondition extends ViewContainsItemsCondition {
     public HorizontalListItemCondition(int numberOfItems) {
         super(numberOfItems);

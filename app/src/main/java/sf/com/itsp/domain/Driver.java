@@ -1,13 +1,20 @@
 package sf.com.itsp.domain;
 
 public class Driver {
-    private int driverImageId;
+    private int driverPhoto;
 
-    public Driver(int driverImageId) {
-        this.driverImageId = driverImageId;
+    private String driverName;
+
+    public Driver(int driverPhoto, String driverName) {
+        this.driverPhoto = driverPhoto;
+        this.driverName = driverName;
     }
 
     public int getDriverImageId() {
-        return driverImageId;
+        return driverPhoto;
+    }
+
+    public String getDriverName() {
+        return driverName;
     }
 }

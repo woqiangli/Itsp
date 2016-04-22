@@ -19,7 +19,6 @@ import sf.com.itsp.BuildConfig;
 import sf.com.itsp.R;
 import sf.com.itsp.domain.Order;
 import sf.com.itsp.domain.Vehicle;
-import sf.com.itsp.orderDetail.HorizontalListView;
 import sf.com.itsp.shadows.ShadowConnectionProxy;
 import sf.com.itsp.vehicle.VehicleModel;
 

@@ -6,4 +6,6 @@
     <string name="time">时间:</string>
     <string name="weight">重量:</string>
     <string name="vehicle_list_title">请选择车辆</string>
+    <string name="driver_tip">请选择司机</string>
+    <string name="vehicle_tip">请选择车辆</string>
 </resources>

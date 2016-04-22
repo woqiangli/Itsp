@@ -1,22 +1,19 @@
 package sf.com.itsp.domain;
 
 public class Vehicle {
-    private int photo;
-    private String number;
+    private int vehiclePhoto;
+    private String vehicleNumber;
 
-    public int getPhoto() {
-        return photo;
+    public Vehicle(int vehiclePhoto, String vehicleNumber) {
+        this.vehiclePhoto = vehiclePhoto;
+        this.vehicleNumber = vehicleNumber;
     }
 
-    public void setPhoto(int photo) {
-        this.photo = photo;
+    public int getPhoto() {
+        return vehiclePhoto;
     }
 
     public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
+        return vehicleNumber;
     }
 }

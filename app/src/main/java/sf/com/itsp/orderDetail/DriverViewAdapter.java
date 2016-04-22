@@ -1,23 +1,22 @@
 package sf.com.itsp.orderDetail;
 
 import android.content.Context;
-import android.view.ViewGroup;
 
-import sf.com.itsp.adapter.ItspBaseAdapter;
+import java.util.List;
+
 import sf.com.itsp.domain.Driver;
 
-public class DriverViewAdapter extends ItspBaseAdapter<DriverItemView, Driver> {
-    public DriverViewAdapter(Context context) {
-        super(context);
+public class DriverViewAdapter extends RecyclerViewAdapter {
+    private List<Driver> driverList;
+
+    public DriverViewAdapter(Context context, List<Driver> driverList) {
+        super(context, driverList);
+        this.driverList = driverList;
     }
 
     @Override
-    protected void updateView(DriverItemView view, int position) {
-        view.setModel(getItem(position));
-    }
-
-    @Override
-    protected DriverItemView buildView(ViewGroup parent) {
-        return new DriverItemView(context);
+    public void updateView(ViewHolder viewHolder, int i) {
+        viewHolder.itemPhoto.setImageResource(driverList.get(i).getDriverImageId());
+        viewHolder.itemName.setText(driverList.get(i).getDriverName());
     }
 }

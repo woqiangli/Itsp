@@ -1,104 +1,73 @@
 package sf.com.itsp.activities;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.meetme.android.horizontallistview.HorizontalListView;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import sf.com.itsp.R;
 import sf.com.itsp.domain.Driver;
 import sf.com.itsp.domain.Vehicle;
 import sf.com.itsp.orderDetail.DriverViewAdapter;
-import sf.com.itsp.utils.ConnectionProxy;
-import sf.com.itsp.vehicle.VehicleAdapter;
-import sf.com.itsp.vehicle.VehicleModel;
+import sf.com.itsp.orderDetail.VehicleViewAdapter;
 
 public class OrderDetailActivity extends Activity {
-
-    private HorizontalListView vehicleList;
-    private VehicleAdapter vehicleAdapter;
-
-    private DriverViewAdapter adapter;
+    private RecyclerView driverView;
+    private RecyclerView vehicleView;
+    private DriverViewAdapter driverAdapter;
+    private VehicleViewAdapter vehicleAdapter;
+    private List<Driver> driverList = new ArrayList<Driver>();
+    private List<Vehicle> vehicleList = new ArrayList<Vehicle>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_detail_activity);
-        initUi();
-        refreshUi();
+
+        initDatas();
+
+        driverView = (RecyclerView) findViewById(R.id.driver_view);
+        vehicleView = (RecyclerView) findViewById(R.id.vehicle_view);
+
+        LinearLayoutManager driverLinearLayoutManager = new LinearLayoutManager(this);
+        driverLinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        LinearLayoutManager vehicleLinearLayoutManager = new LinearLayoutManager(this);
+        vehicleLinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        driverView.setLayoutManager(driverLinearLayoutManager);
+        vehicleView.setLayoutManager(vehicleLinearLayoutManager);
+
+        driverAdapter = new DriverViewAdapter(getApplicationContext(), driverList);
+        vehicleAdapter = new VehicleViewAdapter(getApplicationContext(), vehicleList);
+        driverView.setAdapter(driverAdapter);
+        vehicleView.setAdapter(vehicleAdapter);
     }
 
-    private void initUi() {
-        initVehicleList();
-        initDriverListView();
-    }
+    private void initDatas() {
+        driverList.add(new Driver(R.drawable.enter, "Dr.1"));
+        driverList.add(new Driver(R.drawable.enter, "Dr.2"));
+        driverList.add(new Driver(R.drawable.enter, "Dr.3"));
+        driverList.add(new Driver(R.drawable.enter, "Dr.4"));
+        driverList.add(new Driver(R.drawable.enter, "Dr.5"));
+        driverList.add(new Driver(R.drawable.enter, "Dr.6"));
+        driverList.add(new Driver(R.drawable.enter, "Dr.7"));
+        driverList.add(new Driver(R.drawable.enter, "Dr.8"));
+        driverList.add(new Driver(R.drawable.enter, "Dr.9"));
+        driverList.add(new Driver(R.drawable.enter, "Dr.11"));
 
-    private void requestVehicleList() {
-        new AsyncTask<Void, Void, List<Vehicle>>() {
-            @Override
-            protected List<Vehicle> doInBackground(Void... voids) {
-                return ConnectionProxy.getInstance().requestVehicle(getApplicationContext());
-            }
+        vehicleList.add(new Vehicle(R.drawable.car, "Vc.1"));
+        vehicleList.add(new Vehicle(R.drawable.car, "Vc.2"));
+        vehicleList.add(new Vehicle(R.drawable.car, "Vc.3"));
+        vehicleList.add(new Vehicle(R.drawable.car, "Vc.4"));
+        vehicleList.add(new Vehicle(R.drawable.car, "Vc.5"));
+        vehicleList.add(new Vehicle(R.drawable.car, "Vc.6"));
+        vehicleList.add(new Vehicle(R.drawable.car, "Vc.7"));
+        vehicleList.add(new Vehicle(R.drawable.car, "Vc.8"));
+        vehicleList.add(new Vehicle(R.drawable.car, "Vc.9"));
+        vehicleList.add(new Vehicle(R.drawable.car, "Vc.11"));
 
-            @Override
-            protected void onPostExecute(List<Vehicle> vehicleList) {
-                Iterable<VehicleModel> transform = Iterables.transform(vehicleList, new Function<Vehicle, VehicleModel>() {
-                    @Override
-                    public VehicleModel apply(Vehicle vehicle) {
-                        return VehicleModel.fromVehicle(vehicle);
-                    }
-                });
-                vehicleAdapter.setItems(Lists.newArrayList(transform));
-            }
-        }.execute();
-    }
-
-    private void requestDriver() {
-        new AsyncTask<Void, Void, List<Driver>>() {
-            @Override
-            protected List<Driver> doInBackground(Void... params) {
-                return ConnectionProxy.getInstance().requestDriver(getApplicationContext());
-            }
-
-            @Override
-            protected void onPostExecute(List<Driver> drivers) {
-                refreshListView(drivers);
-            }
-        }.execute();
-    }
-
-    private void refreshListView(List<Driver> drivers) {
-        adapter.setItems(drivers);
-    }
-
-    private void refreshUi() {
-        requestVehicleList();
-        requestDriver();
-    }
-
-    private void initVehicleList() {
-        vehicleAdapter = new VehicleAdapter(getApplicationContext());
-        vehicleList = (HorizontalListView) findViewById(R.id.vehicle_list);
-        vehicleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                vehicleAdapter.select(i);
-            }
-        });
-        vehicleList.setAdapter(vehicleAdapter);
-    }
-
-    private void initDriverListView() {
-        adapter = new DriverViewAdapter(getApplicationContext());
-        sf.com.itsp.orderDetail.HorizontalListView listView = (sf.com.itsp.orderDetail.HorizontalListView) findViewById(R.id.driver_image_list);
-        listView.setAdapter(adapter);
     }
 }
