@@ -11,6 +11,8 @@ gradle/
 .idea/vcs.xml
 app/src/main/res/raw/app_config.properties
 .idea/gradle.xml
+.idea/encodings.xml
+.idea/dictionaries/
 
 
 # Built application files

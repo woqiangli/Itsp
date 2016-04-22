@@ -34,7 +34,7 @@ public class ConnectionProxy {
         return (List<Order>) Orders.request(context);
     }
 
-    public List<Vehicle> requestVehicleList(Context context) {
+    public List<Vehicle> requestVehicle(Context context) {
         return (List<Vehicle>) Vehicles.request(context);
     }
 
