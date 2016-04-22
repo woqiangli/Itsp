@@ -48,4 +48,8 @@ public class ShadowConnectionProxy {
     public List<Vehicle> requestVehicle(Context context) {
         return vehicles;
     }
+
+    public static void setVehicleList(List<Vehicle> vehicles) {
+        ShadowConnectionProxy.vehicles = vehicles;
+    }
 }
