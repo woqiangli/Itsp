@@ -1,11 +1,11 @@
 package sf.com.itsp.activities;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import sf.com.itsp.R;
@@ -13,61 +13,82 @@ import sf.com.itsp.domain.Driver;
 import sf.com.itsp.domain.Vehicle;
 import sf.com.itsp.orderDetail.DriverViewAdapter;
 import sf.com.itsp.orderDetail.VehicleViewAdapter;
+import sf.com.itsp.utils.ConnectionProxy;
 
 public class OrderDetailActivity extends Activity {
-    private RecyclerView driverView;
-    private RecyclerView vehicleView;
     private DriverViewAdapter driverAdapter;
     private VehicleViewAdapter vehicleAdapter;
-    private List<Driver> driverList = new ArrayList<Driver>();
-    private List<Vehicle> vehicleList = new ArrayList<Vehicle>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_detail_activity);
 
-        initDatas();
+        initView();
+        requestData();
 
-        driverView = (RecyclerView) findViewById(R.id.driver_view);
-        vehicleView = (RecyclerView) findViewById(R.id.vehicle_view);
+    }
+
+    private void requestData() {
+        requestDriver();
+
+        requestVehicle();
+    }
+
+    private void requestDriver() {
+        new AsyncTask<Void, Void, List<Driver>>() {
+            @Override
+            protected List<Driver> doInBackground(Void... params) {
+                return ConnectionProxy.getInstance().requestDriver(getApplicationContext());
+            }
+
+            @Override
+            protected void onPostExecute(List<Driver> drivers) {
+                driverAdapter.setItems(drivers);
+            }
+        }.execute();
+    }
+
+    private void requestVehicle() {
+        new AsyncTask<Void, Void, List<Vehicle>>() {
+            @Override
+            protected List<Vehicle> doInBackground(Void... params) {
+                return ConnectionProxy.getInstance().requestVehicle(getApplicationContext());
+            }
+
+            @Override
+            protected void onPostExecute(List<Vehicle> vehicles) {
+                vehicleAdapter.setItems(vehicles);
+            }
+        }.execute();
+    }
+
+    private void initView() {
+        initDriverView();
+        initVehicleView();
+    }
+
+    private void initDriverView() {
+        RecyclerView driverView = (RecyclerView) findViewById(R.id.driver_view);
 
         LinearLayoutManager driverLinearLayoutManager = new LinearLayoutManager(this);
         driverLinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        driverView.setLayoutManager(driverLinearLayoutManager);
+
+        driverAdapter = new DriverViewAdapter(getApplicationContext());
+
+        driverView.setAdapter(driverAdapter);
+    }
+
+    private void initVehicleView() {
+        RecyclerView vehicleView = (RecyclerView) findViewById(R.id.vehicle_view);
 
         LinearLayoutManager vehicleLinearLayoutManager = new LinearLayoutManager(this);
         vehicleLinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        driverView.setLayoutManager(driverLinearLayoutManager);
         vehicleView.setLayoutManager(vehicleLinearLayoutManager);
 
-        driverAdapter = new DriverViewAdapter(getApplicationContext(), driverList);
-        vehicleAdapter = new VehicleViewAdapter(getApplicationContext(), vehicleList);
-        driverView.setAdapter(driverAdapter);
+        vehicleAdapter = new VehicleViewAdapter(getApplicationContext());
+
         vehicleView.setAdapter(vehicleAdapter);
-    }
-
-    private void initDatas() {
-        driverList.add(new Driver(R.drawable.enter, "Dr.1"));
-        driverList.add(new Driver(R.drawable.enter, "Dr.2"));
-        driverList.add(new Driver(R.drawable.enter, "Dr.3"));
-        driverList.add(new Driver(R.drawable.enter, "Dr.4"));
-        driverList.add(new Driver(R.drawable.enter, "Dr.5"));
-        driverList.add(new Driver(R.drawable.enter, "Dr.6"));
-        driverList.add(new Driver(R.drawable.enter, "Dr.7"));
-        driverList.add(new Driver(R.drawable.enter, "Dr.8"));
-        driverList.add(new Driver(R.drawable.enter, "Dr.9"));
-        driverList.add(new Driver(R.drawable.enter, "Dr.11"));
-
-        vehicleList.add(new Vehicle(R.drawable.car, "Vc.1"));
-        vehicleList.add(new Vehicle(R.drawable.car, "Vc.2"));
-        vehicleList.add(new Vehicle(R.drawable.car, "Vc.3"));
-        vehicleList.add(new Vehicle(R.drawable.car, "Vc.4"));
-        vehicleList.add(new Vehicle(R.drawable.car, "Vc.5"));
-        vehicleList.add(new Vehicle(R.drawable.car, "Vc.6"));
-        vehicleList.add(new Vehicle(R.drawable.car, "Vc.7"));
-        vehicleList.add(new Vehicle(R.drawable.car, "Vc.8"));
-        vehicleList.add(new Vehicle(R.drawable.car, "Vc.9"));
-        vehicleList.add(new Vehicle(R.drawable.car, "Vc.11"));
-
     }
 }

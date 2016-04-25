@@ -1,22 +1,30 @@
 package sf.com.itsp.orderDetail;
 
 import android.content.Context;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.util.List;
-
+import sf.com.itsp.R;
 import sf.com.itsp.domain.Vehicle;
 
-public class VehicleViewAdapter extends RecyclerViewAdapter {
-    private List<Vehicle> vehicleList;
+import static sf.com.itsp.orderDetail.OrderDetailHolder.vehicleNumber;
+import static sf.com.itsp.orderDetail.OrderDetailHolder.vehiclePhoto;
 
-    public VehicleViewAdapter(Context context, List<Vehicle> vehicleList) {
-        super(context, vehicleList);
-        this.vehicleList = vehicleList;
+public class VehicleViewAdapter extends RecyclerViewAdapter<Vehicle> {
+    public VehicleViewAdapter(Context context) {
+        super(context);
     }
 
     @Override
-    public void updateView(RecyclerViewAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.itemPhoto.setImageResource(vehicleList.get(i).getPhoto());
-        viewHolder.itemName.setText(vehicleList.get(i).getNumber());
+    public void buildView(View view) {
+        vehiclePhoto = (ImageView) view.findViewById(R.id.item_image);
+        vehicleNumber = (TextView) view.findViewById(R.id.item_text);
+    }
+
+    @Override
+    public void updateView(OrderDetailHolder viewHolder, int position) {
+        vehiclePhoto.setImageResource(items.get(position).getPhoto());
+        vehicleNumber.setText(items.get(position).getNumber());
     }
 }

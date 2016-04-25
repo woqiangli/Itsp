@@ -1,22 +1,30 @@
 package sf.com.itsp.orderDetail;
 
 import android.content.Context;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.util.List;
-
+import sf.com.itsp.R;
 import sf.com.itsp.domain.Driver;
 
-public class DriverViewAdapter extends RecyclerViewAdapter {
-    private List<Driver> driverList;
+import static sf.com.itsp.orderDetail.OrderDetailHolder.driverName;
+import static sf.com.itsp.orderDetail.OrderDetailHolder.driverPhoto;
 
-    public DriverViewAdapter(Context context, List<Driver> driverList) {
-        super(context, driverList);
-        this.driverList = driverList;
+public class DriverViewAdapter extends RecyclerViewAdapter<Driver> {
+    public DriverViewAdapter(Context context) {
+        super(context);
     }
 
     @Override
-    public void updateView(ViewHolder viewHolder, int i) {
-        viewHolder.itemPhoto.setImageResource(driverList.get(i).getDriverImageId());
-        viewHolder.itemName.setText(driverList.get(i).getDriverName());
+    public void buildView(View view) {
+        driverPhoto = (ImageView) view.findViewById(R.id.item_image);
+        driverName = (TextView) view.findViewById(R.id.item_text);
+    }
+
+    @Override
+    public void updateView(OrderDetailHolder orderDetailHolder, int position) {
+        driverPhoto.setImageResource(items.get(position).getDriverImageId());
+        driverName.setText(items.get(position).getDriverName());
     }
 }
