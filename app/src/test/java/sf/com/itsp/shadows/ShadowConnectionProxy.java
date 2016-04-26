@@ -19,14 +19,14 @@ public class ShadowConnectionProxy {
     private static List<Driver> drivers = newArrayList();
     private static List<Vehicle> vehicles = newArrayList();
 
-    public static void fakeOrders(List<Order> fakedOrders) {
-        orders = fakedOrders;
-    }
-
     public static void clearAll() {
         orders = newArrayList();
         vehicles = newArrayList();
         drivers = newArrayList();
+    }
+
+    public static void fakeOrders(List<Order> fakedOrders) {
+        orders = fakedOrders;
     }
 
     public static void fakeDrivers(List<Driver> fakedDrivers) {
@@ -49,7 +49,4 @@ public class ShadowConnectionProxy {
         return vehicles;
     }
 
-    public static void setVehicleList(List<Vehicle> vehicles) {
-        ShadowConnectionProxy.vehicles = vehicles;
-    }
 }

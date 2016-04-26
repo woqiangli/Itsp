@@ -1,21 +1,30 @@
 package sf.com.itsp.activities;
 
 import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ActivityController;
 
 import sf.com.itsp.BasicTestRunner;
 import sf.com.itsp.BuildConfig;
+import sf.com.itsp.R;
 import sf.com.itsp.domain.Order;
 import sf.com.itsp.shadows.ShadowConnectionProxy;
 
+import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Robolectric.buildActivity;
+import static org.robolectric.shadows.ShadowApplication.runBackgroundTasks;
+import static sf.com.itsp.testHelper.condition.RecyclerViewContainsItemCondition.numberOfItems;
+import static sf.com.itsp.utils.DriverProvider.mockDriverResponse;
+import static sf.com.itsp.utils.VehicleProvider.mockVehicleResponse;
 
 @RunWith(BasicTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 17, shadows = {ShadowConnectionProxy.class})
@@ -39,33 +48,6 @@ public class OrderDetailActivityTest {
         //assertThat(targetView).has(text("755B"));
     }
 
-//    @Test
-//    public void should_display_vehicle_data_from_service() {
-//        List<Vehicle> vehicles = initVehicles();
-//        ShadowConnectionProxy.setVehicleList(vehicles);
-//
-//        // given
-//        OrderDetailActivity orderDetailActivity = initOrderDetailActivity();
-//        com.meetme.android.horizontallistview.HorizontalListView vehicleList = (com.meetme.android.horizontallistview.HorizontalListView) orderDetailActivity.findViewById(R.id.vehicle_list);
-//
-//        // when
-//        int index = 0;
-//        VehicleModel vehicleModel = (VehicleModel) vehicleList.getAdapter().getItem(index);
-//
-//        // then
-//        Assertions.assertThat(vehicleModel.getVehicle().getNumber()).isEqualTo(vehicles.get(index).getNumber());
-//    }
-
-//    private List<Vehicle> initVehicles() {
-//        List<Vehicle> vehicles = new ArrayList<Vehicle>();
-//        for (int i = 0; i < 20; i++) {
-//            Vehicle vehicle = new Vehicle();
-//            vehicle.setNumber("number" + i);
-//            vehicle.setPhoto(2130837504);
-//            vehicles.add(vehicle);
-//        }
-//        return vehicles;
-//    }
 
     private OrderDetailActivity initOrderDetailActivity() {
         Order mockOrder = generateOrder("755A", "755B");
@@ -87,20 +69,37 @@ public class OrderDetailActivityTest {
         return mockOrder;
     }
 
-//    @Test
-//    public void should_display_drivers_on_order_detail_activity() {
-//        // given
-//        mockDriverResponse();
-//
-//        ActivityController<OrderDetailActivity> orderDetailActivityActivityController = Robolectric.buildActivity(OrderDetailActivity.class);
-//
-//        // when
-//        orderDetailActivityActivityController.create();
-//        OrderDetailActivity orderDetailActivity = orderDetailActivityActivityController.get();
-//        HorizontalListView driverListView = (HorizontalListView) orderDetailActivity.findViewById(R.id.driver_image_list);
-//        runBackgroundTasks();
-//
-//        // then
-//        assertThat(driverListView).has(numberOfItems(3));
-//    }
+    @Test
+    public void should_display_drivers_on_order_detail_activity() {
+        // given
+        mockDriverResponse();
+
+        ActivityController<OrderDetailActivity> orderDetailActivityActivityController = Robolectric.buildActivity(OrderDetailActivity.class);
+
+        // when
+        orderDetailActivityActivityController.create();
+        OrderDetailActivity orderDetailActivity = orderDetailActivityActivityController.get();
+        RecyclerView driverView = (RecyclerView) orderDetailActivity.findViewById(R.id.driver_view);
+        runBackgroundTasks();
+
+        // then
+        assertThat(driverView).has(numberOfItems(3));
+    }
+
+    @Test
+    public void should_display_vehicles_on_order_detail_activity() {
+        // given
+        mockVehicleResponse();
+
+        ActivityController<OrderDetailActivity> orderDetailActivityActivityController = Robolectric.buildActivity(OrderDetailActivity.class);
+
+        // when
+        orderDetailActivityActivityController.create();
+        OrderDetailActivity orderDetailActivity = orderDetailActivityActivityController.get();
+        RecyclerView vehicleView = (RecyclerView) orderDetailActivity.findViewById(R.id.vehicle_view);
+        runBackgroundTasks();
+
+        // then
+        assertThat(vehicleView).has(numberOfItems(4));
+    }
 }

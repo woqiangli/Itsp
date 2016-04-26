@@ -19,6 +19,6 @@ public abstract class ViewContainsItemsCondition extends Condition<View> {
         return count == numberOfItems;
     }
 
-    protected abstract int getCount(ViewGroup listView);
+    protected abstract int getCount(ViewGroup viewGroup);
 
 }
