@@ -3,14 +3,10 @@ package sf.com.itsp;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.content.AsyncTaskLoader;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import sf.com.itsp.domain.Task;
 import sf.com.itsp.tasks.TaskAdapter;
 import sf.com.itsp.utils.ConnectionProxy;
 
