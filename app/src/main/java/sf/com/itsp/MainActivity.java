@@ -1,44 +1,37 @@
 package sf.com.itsp;
 
-import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ListView;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 
-import java.util.List;
+import com.viewpagerindicator.TabPageIndicator;
 
-import sf.com.itsp.tasks.TaskAdapter;
-import sf.com.itsp.utils.ConnectionProxy;
+import sf.com.itsp.adapter.TabPageIndicatorAdapter;
+import sf.com.itsp.fragment.OtherFragment;
+import sf.com.itsp.fragment.TaskFragment;
 
-public class MainActivity extends Activity {
-    private TaskAdapter taskAdapter;
+public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initData();
         initView();
     }
 
-    public void initData() {
-        new AsyncTask<Void, Void, List>() {
-            @Override
-            protected List doInBackground(Void... params) {
-                return ConnectionProxy.getInstance().requestTask(getApplicationContext());
-            }
-
-            @Override
-            protected void onPostExecute(List tasks) {
-                taskAdapter.setItems(tasks);
-            }
-        }.execute();
-    }
 
     public void initView() {
-        taskAdapter = new TaskAdapter(getApplicationContext());
-        ListView listView = (ListView) findViewById(R.id.task_list);
-        listView.setAdapter(taskAdapter);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_paper);
+        TabPageIndicatorAdapter tabpageIndicatorAdapter = new TabPageIndicatorAdapter(getSupportFragmentManager());
+        TaskFragment taskFragment = new TaskFragment();
+        OtherFragment testFragment = new OtherFragment();
+        tabpageIndicatorAdapter.addFragment("执行任务", taskFragment);
+        tabpageIndicatorAdapter.addFragment("其他", testFragment);
+        viewPager.setAdapter(tabpageIndicatorAdapter);
+
+        TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(viewPager);
+
     }
 }
