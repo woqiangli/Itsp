@@ -1,6 +1,7 @@
 package sf.com.itsp;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
@@ -23,15 +24,20 @@ public class MainActivity extends FragmentActivity {
 
     public void initView() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_paper);
-        TabPageIndicatorAdapter tabpageIndicatorAdapter = new TabPageIndicatorAdapter(getSupportFragmentManager());
-        TaskFragment taskFragment = new TaskFragment();
-        OtherFragment testFragment = new OtherFragment();
-        tabpageIndicatorAdapter.addFragment("执行任务", taskFragment);
-        tabpageIndicatorAdapter.addFragment("其他", testFragment);
+        TabPageIndicatorAdapter tabpageIndicatorAdapter = initFragment();
         viewPager.setAdapter(tabpageIndicatorAdapter);
 
         TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(viewPager);
 
+    }
+
+    private TabPageIndicatorAdapter initFragment() {
+        TabPageIndicatorAdapter tabpageIndicatorAdapter = new TabPageIndicatorAdapter(getSupportFragmentManager());
+        TaskFragment taskFragment = new TaskFragment();
+        OtherFragment testFragment = new OtherFragment();
+        tabpageIndicatorAdapter.addFragment("执行任务", taskFragment);
+        tabpageIndicatorAdapter.addFragment("其他", testFragment);
+        return tabpageIndicatorAdapter;
     }
 }
