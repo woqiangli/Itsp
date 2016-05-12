@@ -24,8 +24,15 @@
             android:layout_marginLeft="34dp"
             android:layout_marginRight="22dp"
             android:textColor="#3c4f5e"
-            android:text="sdf"
             android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/operation_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:padding="2dp"
+            android:background="@drawable/background_shape"/>
     </LinearLayout>
 </RelativeLayout>

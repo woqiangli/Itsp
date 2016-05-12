@@ -43,5 +43,8 @@ public class MainActivityTest {
         assertThat(listView).has(numberOfItems(2));
         assertThat(listView).has(childWith(text("深圳市中转场")));
         assertThat(listView).has(childWith(text("长沙中转场")));
+
+        assertThat(listView).has(childWith(text("装车")));
+        assertThat(listView).has(childWith(text("卸车")));
     }
 }

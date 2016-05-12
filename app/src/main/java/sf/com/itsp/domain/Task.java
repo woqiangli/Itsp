@@ -4,15 +4,18 @@ public class Task {
 
     private String address;
 
-    public Task(String address) {
-        this.address = address;
-    }
+    private String operation;
 
-    public void setAddress(String address) {
+    public Task(String address, String operation) {
         this.address = address;
+        this.operation = operation;
     }
 
     public String getAddress() {
         return address;
+    }
+
+    public String getOperation() {
+        return operation;
     }
 }

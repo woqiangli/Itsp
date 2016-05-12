@@ -12,6 +12,8 @@ import sf.com.itsp.domain.Task;
 public class TaskItemView extends LinearLayout{
     private TextView addressValueTextView;
 
+    private TextView operationValueTextView;
+
     public TaskItemView(Context context) {
         super(context);
         initUi();
@@ -32,9 +34,11 @@ public class TaskItemView extends LinearLayout{
         inflater.inflate(R.layout.task_item, this, true);
 
         addressValueTextView = (TextView) findViewById(R.id.address_name);
+        operationValueTextView = (TextView) findViewById(R.id.operation_type);
     }
 
     public void setModel(Task task) {
         addressValueTextView.setText(task.getAddress());
+        operationValueTextView.setText(task.getOperation());
     }
 }
