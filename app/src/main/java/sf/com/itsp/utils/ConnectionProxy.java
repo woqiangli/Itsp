@@ -4,17 +4,14 @@ import android.content.Context;
 
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sf.com.itsp.connectivity.HttpClient;
-import sf.com.itsp.domain.Driver;
-import sf.com.itsp.domain.Order;
 import sf.com.itsp.domain.ServerAddress;
-import sf.com.itsp.domain.Vehicle;
+import sf.com.itsp.domain.Task;
 
-import static sf.com.itsp.utils.ConnectionProxy.RequestPath.Drivers;
-import static sf.com.itsp.utils.ConnectionProxy.RequestPath.Orders;
-import static sf.com.itsp.utils.ConnectionProxy.RequestPath.Vehicles;
+import static sf.com.itsp.utils.ConnectionProxy.RequestPath.Tasks;
 
 public class ConnectionProxy {
     private static ConnectionProxy instance;
@@ -30,22 +27,13 @@ public class ConnectionProxy {
 
     }
 
-    public List<Order> requestOrder(Context context) {
-        return (List<Order>) Orders.request(context);
+    public List<Task> requestTask(Context context) {
+        return (List<Task>) Tasks.request(context);
     }
 
-    public List<Vehicle> requestVehicle(Context context) {
-        return (List<Vehicle>) Vehicles.request(context);
-    }
-
-    public List<Driver> requestDriver(Context context) {
-        return (List<Driver>) Drivers.request(context);
-    }
 
     public enum RequestPath {
-        Orders("orders", Order[].class),
-        Drivers("drivers", Driver[].class),
-        Vehicles("vehicles", Vehicle[].class);
+        Tasks("tasks", Task[].class);
 
         private final String path;
         private final TypeToken typeToken;

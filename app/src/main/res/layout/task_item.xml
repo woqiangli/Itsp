@@ -6,9 +6,10 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:padding="3dp">
+        android:layout_marginTop="33dp"
+        android:layout_marginBottom="33dp">
 
         <ImageView
             android:id="@+id/address_icon"
@@ -20,10 +21,11 @@
             android:id="@+id/address_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/address_icon"
             android:layout_marginLeft="34dp"
             android:layout_marginRight="22dp"
             android:textColor="#3c4f5e"
+            android:text="sdf"
             android:textSize="20sp" />
+
     </LinearLayout>
 </RelativeLayout>
