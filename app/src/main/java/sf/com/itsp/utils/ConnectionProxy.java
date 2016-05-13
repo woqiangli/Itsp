@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import sf.com.itsp.connectivity.HttpClient;
@@ -28,11 +27,7 @@ public class ConnectionProxy {
     }
 
     public List<Task> requestTask(Context context) {
-        List<Task> taskList = new ArrayList<Task>();
-        taskList.add(new Task("深圳市中转场","装车"));
-        taskList.add(new Task("长沙中转场","卸车"));
-//        return (List<Task>) Tasks.request(context);
-        return taskList;
+        return (List<Task>) Tasks.request(context);
     }
 
 
