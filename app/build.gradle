@@ -37,5 +37,6 @@ dependencies {
     testCompile 'org.robolectric:robolectric:3.0'
     testCompile 'org.mockito:mockito-core:1.7'
     testCompile 'com.google.code.gson:gson:2.6.2'
+    testCompile "org.robolectric:shadows-support-v4:3.0"
 }
 
