@@ -1,6 +1,7 @@
 package sf.com.itsp;
 
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.junit.After;
 import org.junit.Test;
@@ -17,6 +18,7 @@ import static sf.com.itsp.testCondition.ContainsTextCondition.text;
 import static sf.com.itsp.testCondition.ListViewChildCondition.childWith;
 import static sf.com.itsp.testCondition.ListViewContainsItemsCondition.numberOfItems;
 import static sf.com.itsp.utils.TaskProvider.mockTaskResponse;
+import static sf.com.itsp.utils.VehicleProvider.mockVehicleResponse;
 
 @RunWith(BasicTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -24,7 +26,7 @@ public class TaskFragmentTest {
 
     @After
     public void teardown() {
-        ShadowConnectionProxy.clearTasks();
+        ShadowConnectionProxy.clearAll();
     }
 
     @Test
@@ -51,6 +53,21 @@ public class TaskFragmentTest {
         assertThat(listView).has(childWith(text("24:00")));
 
         assertThat(listView).has(childWith(text("10:30")));
+    }
 
+    @Test
+    @Config(constants = BuildConfig.class, sdk = 17, shadows = {ShadowConnectionProxy.class})
+    public void should_show_vehicle_number_when_on_created() {
+        //given
+        mockVehicleResponse();
+        TaskFragment taskFragment = new TaskFragment();
+
+        //when
+        SupportFragmentTestUtil.startFragment(taskFragment);
+        TextView vehicleNumber = (TextView) taskFragment.getView().findViewById(R.id.vehicle_number);
+        runBackgroundTasks();
+
+        //then
+//        assertThat(vehicleNumber).has(text("粤A-123456"));
     }
 }
