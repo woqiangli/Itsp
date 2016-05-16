@@ -31,11 +31,11 @@ public class ConnectionProxy {
     }
 
     public List<Task> requestTask(Context context) {
-        List<Task> taskList = new ArrayList<Task>();
-        taskList.add(new Task("深圳市中转场","装车","10:00","10:30",30,"始发"));
-        taskList.add(new Task("长沙中转场","卸车","24:00","10:30",120,"经停"));
-        return taskList;
-//        return (List<Task>) Tasks.request(context);
+//        List<Task> taskList = new ArrayList<Task>();
+//        taskList.add(new Task("深圳市中转场","装车","10:00","10:30",30,"始发"));
+//        taskList.add(new Task("长沙中转场","卸车","24:00","10:30",120,"经停"));
+//        return taskList;
+        return (List<Task>) Tasks.request(context);
     }
 
     public List<Vehicle> requestVehicle(Context context) {

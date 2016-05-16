@@ -8,7 +8,7 @@ public class Task {
     private int waitingTime;
     private String vehicleStatus;
 
-    public Task(String address, String operation, String arriveTime, String latestDepartureTime,int waitingTime,String vehicleStatus) {
+    public Task(String address, String operation, String arriveTime, String latestDepartureTime, int waitingTime, String vehicleStatus) {
         this.address = address;
         this.operation = operation;
         this.arriveTime = arriveTime;

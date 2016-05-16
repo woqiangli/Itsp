@@ -10,7 +10,7 @@ import sf.com.itsp.R;
 import sf.com.itsp.domain.Task;
 
 public class TaskItemView extends LinearLayout {
-    private TextView addressValueTextView,operationValueTextView,arriveTimeValueTextView,latestDepartureTimeValueTextView,waitingTimeValueTextView,vehicleStatusValueTextView;
+    private TextView addressValueTextView, operationValueTextView, arriveTimeValueTextView, latestDepartureTimeValueTextView, waitingTimeValueTextView, vehicleStatusValueTextView;
 
     public TaskItemView(Context context) {
         super(context);
@@ -44,7 +44,7 @@ public class TaskItemView extends LinearLayout {
         operationValueTextView.setText(task.getOperation());
         arriveTimeValueTextView.setText(task.getArriveTime());
         latestDepartureTimeValueTextView.setText(task.getLatestDepartureTime());
-        waitingTimeValueTextView.setText(task.getWaitingTime()+"");
+        waitingTimeValueTextView.setText(task.getWaitingTime() + "");
         vehicleStatusValueTextView.setText(task.getVehicleStatus());
     }
 }
