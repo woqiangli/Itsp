@@ -6,5 +6,7 @@
     <color name="title">#FFF</color>
     <color name="navigation_background">#c8000000</color>
     <color name="white">#FFF</color>
-
+    <color name="addressName">#3c4f5e</color>
+    <color name="time">#8bc649</color>
+    <color name="timeDescribe">#86929f</color>
 </resources>

@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    android:paddingBottom="2dp"
-    android:paddingTop="2dp">
+    android:background="@color/white"
+    android:paddingBottom="@dimen/padding_two"
+    android:paddingTop="@dimen/padding_two">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:padding="29dp">
+            android:padding="@dimen/padding_twenty_nine">
 
             <ImageView
                 android:id="@+id/task_icon"
@@ -32,16 +32,16 @@
                 android:id="@+id/address_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="18dp"
-                android:paddingTop="15dp"
+                android:paddingLeft="@dimen/padding_eighteen"
+                android:paddingTop="@dimen/padding_fifteen"
                 android:src="@drawable/address_icon" />
 
             <ImageView
                 android:id="@+id/address_icon1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="18dp"
-                android:paddingTop="25dp"
+                android:paddingLeft="@dimen/padding_eighteen"
+                android:paddingTop="@dimen/padding_twenty_five"
                 android:src="@drawable/address_icon" />
         </LinearLayout>
 
@@ -67,10 +67,10 @@
                             android:id="@+id/address_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="34dp"
-                            android:paddingRight="22dp"
-                            android:textColor="#3c4f5e"
-                            android:textSize="20sp" />
+                            android:paddingLeft="@dimen/padding_thirty_four"
+                            android:paddingRight="@dimen/padding_twenty_two"
+                            android:textColor="@color/addressName"
+                            android:textSize="@dimen/text_size_twenty" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -83,9 +83,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/background_shape"
-                            android:padding="2dp"
-                            android:textColor="#ffffff"
-                            android:textSize="12sp" />
+                            android:padding="@dimen/padding_two"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_twelve" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -103,18 +103,18 @@
                         android:id="@+id/arrive_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="34dp"
-                        android:textColor="#8bc649"
-                        android:textSize="20sp" />
+                        android:paddingLeft="@dimen/padding_thirty_four"
+                        android:textColor="@color/time"
+                        android:textSize="@dimen/text_size_twenty" />
 
                     <TextView
                         android:id="@+id/arrive_time_describe"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="34dp"
-                        android:text="到达时间"
-                        android:textColor="#86929f"
-                        android:textSize="10sp" />
+                        android:paddingLeft="@dimen/padding_thirty_four"
+                        android:text="@string/arrive_time_describe"
+                        android:textColor="@color/timeDescribe"
+                        android:textSize="@dimen/text_size_ten" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -126,18 +126,18 @@
                         android:id="@+id/latest_departure_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="42dp"
-                        android:textColor="#8bc649"
-                        android:textSize="20sp" />
+                        android:paddingLeft="@dimen/padding_forty_two"
+                        android:textColor="@color/time"
+                        android:textSize="@dimen/text_size_twenty" />
 
                     <TextView
                         android:id="@+id/latest_departure_time_describe"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="42dp"
-                        android:text="最晚出发时间"
-                        android:textColor="#86929f"
-                        android:textSize="10sp" />
+                        android:paddingLeft="@dimen/padding_forty_two"
+                        android:text="@string/latest_departure_time_describe"
+                        android:textColor="@color/timeDescribe"
+                        android:textSize="@dimen/text_size_ten" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

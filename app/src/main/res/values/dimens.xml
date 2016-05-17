@@ -3,4 +3,15 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="padding_two">2dp</dimen>
+    <dimen name="padding_twenty_nine">29dp</dimen>
+    <dimen name="padding_eighteen">18dp</dimen>
+    <dimen name="padding_fifteen">15dp</dimen>
+    <dimen name="padding_twenty_five">25dp</dimen>
+    <dimen name="padding_thirty_four">34dp</dimen>
+    <dimen name="padding_twenty_two">22dp</dimen>
+    <dimen name="text_size_twenty">20sp</dimen>
+    <dimen name="text_size_twelve">12sp</dimen>
+    <dimen name="text_size_ten">10sp</dimen>
+    <dimen name="padding_forty_two">42dp</dimen>
 </resources>

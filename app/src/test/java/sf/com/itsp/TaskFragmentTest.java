@@ -1,5 +1,6 @@
 package sf.com.itsp;
 
+import android.support.v7.widget.CardView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,16 +22,14 @@ import static sf.com.itsp.utils.TaskProvider.mockTaskResponse;
 import static sf.com.itsp.utils.VehicleProvider.mockVehicleResponse;
 
 @RunWith(BasicTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = 17, shadows = {ShadowConnectionProxy.class})
 public class TaskFragmentTest {
-
     @After
     public void teardown() {
         ShadowConnectionProxy.clearAll();
     }
 
     @Test
-    @Config(constants = BuildConfig.class, sdk = 17, shadows = {ShadowConnectionProxy.class})
     public void should_show_tasks_when_on_created() {
         //given
         mockTaskResponse();
@@ -56,18 +55,19 @@ public class TaskFragmentTest {
     }
 
     @Test
-    @Config(constants = BuildConfig.class, sdk = 17, shadows = {ShadowConnectionProxy.class})
-    public void should_show_vehicle_number_when_on_created() {
+    public void should_display_vehicle_number_on_task_fragment() {
         //given
         mockVehicleResponse();
         TaskFragment taskFragment = new TaskFragment();
 
         //when
         SupportFragmentTestUtil.startFragment(taskFragment);
+        CardView cardViewText = (CardView) taskFragment.getView().findViewById(R.id.mission_info);
         TextView vehicleNumber = (TextView) taskFragment.getView().findViewById(R.id.vehicle_number);
         runBackgroundTasks();
 
         //then
-//        assertThat(vehicleNumber).has(text("粤A-123456"));
+        assertThat(cardViewText).has(text("车牌号码"));
+        assertThat(vehicleNumber).has(text("粤A-123456"));
     }
 }

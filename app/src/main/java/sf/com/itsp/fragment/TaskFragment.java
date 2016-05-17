@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import sf.com.itsp.R;
+import sf.com.itsp.domain.Task;
 import sf.com.itsp.domain.Vehicle;
 import sf.com.itsp.tasks.TaskAdapter;
 import sf.com.itsp.utils.ConnectionProxy;
@@ -30,17 +31,46 @@ public class TaskFragment extends Fragment {
     }
 
     private void initView(View view) {
-        vehicleNumber = (TextView) view.findViewById(R.id.vehicle_number);
+        initMissionInfoView(view);
 
+        initTaskListView(view);
+    }
+
+    private void initTaskListView(View view) {
         taskAdapter = new TaskAdapter(getActivity().getApplicationContext());
         ListView listView = (ListView) view.findViewById(R.id.task_list);
         listView.setAdapter(taskAdapter);
     }
 
+    private void initMissionInfoView(View view) {
+        vehicleNumber = (TextView) view.findViewById(R.id.vehicle_number);
+    }
+
+
     public void initData() {
-          new AsyncTask<Void, Void, List<Vehicle>>() {
+        initMissionInfo();
+
+        initTaskList();
+    }
+
+    private void initTaskList() {
+        new AsyncTask<Void, Void, List<Task>>() {
             @Override
-            protected List doInBackground(Void... params) {
+            protected List<Task> doInBackground(Void... params) {
+                return ConnectionProxy.getInstance().requestTask(getActivity().getApplicationContext());
+            }
+
+            @Override
+            protected void onPostExecute(List<Task> tasks) {
+                taskAdapter.setItems(tasks);
+            }
+        }.execute();
+    }
+
+    private void initMissionInfo() {
+        new AsyncTask<Void, Void, List<Vehicle>>() {
+            @Override
+            protected List<Vehicle> doInBackground(Void... params) {
                 return ConnectionProxy.getInstance().requestVehicle(getActivity().getApplicationContext());
             }
 
@@ -49,18 +79,5 @@ public class TaskFragment extends Fragment {
                 vehicleNumber.setText(vehicles.get(0).getVehicleNumber());
             }
         }.execute();
-
-        new AsyncTask<Void, Void, List>() {
-            @Override
-            protected List doInBackground(Void... params) {
-                return ConnectionProxy.getInstance().requestTask(getActivity().getApplicationContext());
-            }
-
-            @Override
-            protected void onPostExecute(List tasks) {
-                taskAdapter.setItems(tasks);
-            }
-        }.execute();
-
     }
 }
